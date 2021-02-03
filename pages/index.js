@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import CreatePost from "../components/CreatePost"
+import ListingCard from "../components/ListingCard"
 import fire from '../config/firebase-config';
 import { useState, useEffect } from 'react';
 import Link from "next/link"
 import {useAuth} from "../context/AuthContext"
-import { Button, Alert } from 'react-bootstrap';
+import { Button, Alert, CardGroup } from 'react-bootstrap';
 
 export default function Home() {
   const [listings, setListings] = useState([]);
@@ -63,14 +63,14 @@ export default function Home() {
       {error && <Alert variant="success">{error}</Alert>}
 
       <h1>Housing Hub</h1>
+      <br/>
+      
       {/* {currentUser && <CreatePost/> } */}
-      <ul>
-        {listings.map(listing =>
-          <li key={listing.id}>
-            {listing.address}
-          </li>
+      <CardGroup>
+        {listings.map(listing => 
+          <ListingCard key={listing.id} id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount}/>
         )}
-      </ul>
+      </CardGroup>
     </div>
   )
 }

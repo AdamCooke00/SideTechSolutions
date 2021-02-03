@@ -3,19 +3,20 @@ import {Form, Button, Card, Container, Alert} from "react-bootstrap"
 import {useAuth} from "../context/AuthContext"
 import Link from 'next/link'
 import firebase from '../config/firebase-config';
+import {useRouter} from "next/router"
 
 export default function NewListing() {
     const addressRef = useRef()
     const bedroomCountRef = useRef()
     const totalPriceRef = useRef()
-
+    const router = useRouter()
     const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false) //so user doesnt spam password reset.
+    const [loading, setLoading] = useState(false) //so user doesnt spam create listings.
     const {currentUser} = useAuth();
 
     const handleNewListing = async (event) => {
         event.preventDefault();
-    
+        setLoading(true);
         await firebase.firestore()
         .collection('listing')
         .add({
@@ -25,6 +26,7 @@ export default function NewListing() {
             author_uid: currentUser.uid
         }).then(() => {
             console.log("New Listing Created");
+            router.push('/')
         }).catch((e)=> {
             console.log("Unable to create new listing");
             console.error(e);
