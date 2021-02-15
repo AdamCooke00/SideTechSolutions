@@ -18,4 +18,6 @@ try {
         console.error('Firebase initialization error', err.stack)}
 }
 
+export const db = firebase.firestore();
+export const auth = firebase.auth();
 export default firebase;

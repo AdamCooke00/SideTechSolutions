@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import {Form, Button, Card, Container, Alert} from "react-bootstrap"
 import {useAuth} from "../context/AuthContext"
 import Link from 'next/link'
-import firebase from '../config/firebase-config';
+import firebase, {auth} from '../config/firebase-config';
 import {useRouter} from "next/router"
 
 export default function NewListing() {
@@ -71,3 +71,7 @@ export default function NewListing() {
     </>
   )
 }
+
+// export async function getServerSideProps(context) {
+    
+// }

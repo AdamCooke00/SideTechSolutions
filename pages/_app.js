@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+import 'semantic-ui-css/semantic.min.css'
 import { AuthProvider } from '../context/AuthContext'
 
 function MyApp({ Component, pageProps }) {
