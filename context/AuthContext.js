@@ -28,7 +28,7 @@ export function AuthProvider({children}) {
     }
 
     useEffect(() => {
-        console.log("in useEffect")
+        console.log("in useEffect within auth provider")
         const unsubscribe = firebase.auth().onAuthStateChanged(user => {
             console.log("in AuthStateChanged")
             console.log(user)

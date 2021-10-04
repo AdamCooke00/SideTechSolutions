@@ -1,0 +1,930 @@
+@media only screen and (max-width: 1200px) {
+  #final-section {
+    padding: 4em 2em;
+  }
+}
+
+.editlistingpage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  .editlistingpageportion {
+    flex-grow: 1;
+    text-align: center;
+    background-color: var(--primarypurple);
+    .editlistingformdiv {
+      background-color: var(--white);
+      padding: 2em;
+      word-wrap: break-word;
+      margin: 2em;
+      .editlistingformtitle {
+        margin: 0 0 1em 0;
+      }
+      .editlistingformline {
+        margin: 1em 0;
+        .additionalimagediv {
+          padding-top: 0.5em;
+          border-top: 1px solid black;
+          margin-top: 0.5em;
+          .deleteimagelink {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+            display: block;
+          }
+        }
+        .editlistingformlabel {
+          font-weight: 600;
+          display: block;
+        }
+        input {
+          width: 100%;
+          height: 2em;
+        }
+      }
+      .editlistingbtn {
+        background-color: var(--primarypurple);
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        border: 3px var(--primarypurple) solid;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 1em 0 2em 0;
+      }
+      .editthumbnailtitle {
+        font-weight: 600;
+        font-size: 20px;
+        margin: 1em 0 0 0;
+      }
+      .deletelistingbtn {
+        background-color: var(--white);
+        border: 3px red solid;
+        color: var(--black);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 0 0 2em 0;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 800px) {
+  .editlistingpage {
+    .editlistingpageportion {
+      .editlistingformdiv {
+        margin: 2em 25%;
+        .editlistingformline {
+          input {
+            width: 75%;
+          }
+        }
+      }
+    }
+  }
+}
+.newlistingpage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  .newlistingpageportion {
+    flex-grow: 1;
+    text-align: center;
+    background-color: var(--primarypurple);
+    .newlistingformdiv {
+      background-color: var(--white);
+      padding: 2em;
+      word-wrap: break-word;
+      margin: 2em;
+      .newlistingformtitle {
+        margin: 0 0 1em 0;
+      }
+      .newlistingformline {
+        margin: 1em 0;
+        .newlistingformlabel {
+          font-weight: 600;
+          display: block;
+        }
+        input {
+          width: 100%;
+          height: 2em;
+        }
+        .paragraphlikelink {
+          cursor: pointer;
+          color: blue;
+          text-decoration: underline;
+          margin: 0.5em 0;
+        }
+      }
+      .createlistingbtn {
+        background-color: var(--primarypurple);
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 0 0 2em 0;
+      }
+      .addthumbnailtitle {
+        font-weight: 600;
+        font-size: 20px;
+        margin: 1em 0 0 0;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 800px) {
+  .newlistingpage {
+    .newlistingpageportion {
+      .newlistingformdiv {
+        margin: 2em 25%;
+        .newlistingformline {
+          input {
+            width: 75%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.myprofilepage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  .myprofilepageportion {
+    flex-grow: 1;
+    text-align: center;
+    background-color: var(--primarypurple);
+    .myprofilediv {
+      background-color: var(--white);
+      padding: 2em;
+      word-wrap: break-word;
+      margin: 2em;
+      .myaccounttitlediv {
+        .myaccounttitle {
+          font-size: 15px;
+          text-transform: uppercase;
+          margin: 0;
+          padding: 0;
+        }
+        .myaccountsubtitle {
+          font-weight: 400;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+        .editprofilebtn {
+          background-color: var(--primarypurple);
+          border: none;
+          color: var(--white);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 14px;
+          border-radius: 2em;
+          padding: 1em 2em;
+          margin: 1em 0;
+        }
+        .doneeditprofilebtn {
+          background-color: green;
+          border: none;
+          color: var(--white);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 14px;
+          border-radius: 2em;
+          padding: 1em 2em;
+          margin: 1em 0;
+        }
+      }
+
+      .myprofileline {
+        margin: 1em 0;
+        p {
+          padding: 0;
+          margin: 0;
+        }
+        .myprofilelineheader {
+          font-weight: 600;
+        }
+        .sendverificationbtn {
+          background-color: greenyellow;
+          border: 2px solid var(--black);
+          color: var(--black);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 16px;
+          border-radius: 2em;
+          padding: 0.5em 2em;
+        }
+        .sentverificationbtn {
+          background-color: red;
+          border: 2px solid red;
+          color: var(--white);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 16px;
+          border-radius: 2em;
+          padding: 0.5em 2em;
+        }
+      }
+      .signoutbtn {
+        background-color: var(--white);
+        border: 1px solid var(--black);
+        color: var(--black);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 12px;
+        border-radius: 2em;
+        padding: 0.5em 3em;
+        margin-top: 0.5em;
+      }
+    }
+    .mypropertiesdiv {
+      background-color: var(--white);
+      padding: 2em;
+      word-wrap: break-word;
+      margin: 2em;
+      .verifyemailspan {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+      }
+      .mypropertiestitlediv {
+        .mypropertiestitle {
+          font-size: 15px;
+          text-transform: uppercase;
+          margin: 0;
+          padding: 0;
+        }
+        .addlistingbtn {
+          display: inline-block;
+          background-color: var(--primarypurple);
+          border: none;
+          color: var(--white);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 14px;
+          border-radius: 2em;
+          padding: 1em 2em;
+          margin: 1em 0;
+        }
+      }
+      .oneproperty {
+        padding: 2em 0;
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1300px) {
+  .myprofilepage {
+    // overflow: hidden;
+    .myprofilepageportion {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      .myprofilediv {
+        height: 500px;
+        .myaccounttitlediv {
+          text-align: left;
+          display: grid;
+          grid-template-columns: 70% 30%;
+          .editprofilebtn {
+            margin: 0;
+          }
+          .doneeditprofilebtn {
+            margin: 0;
+          }
+        }
+        .myprofileline {
+          margin: 3em 1em;
+          display: grid;
+          grid-template-columns: 38% 62%;
+          text-align: left;
+        }
+        .signoutbtn {
+          background-color: var(--white);
+          border: 1px solid var(--black);
+          color: var(--black);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 16px;
+          border-radius: 2em;
+          padding: 1em 3em;
+        }
+      }
+      .mypropertiesdiv {
+        // overflow-y: scroll;
+        // height: 600px;
+        .mypropertiestitlediv {
+          display: grid;
+          grid-template-columns: 70% 30%;
+          margin-bottom: 3em;
+          padding-bottom: 1em;
+          box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+          .mypropertiestitle {
+            font-size: 20px;
+            text-transform: uppercase;
+            line-height: 2em;
+            margin: 0;
+            padding: 0;
+          }
+          .addlistingbtn {
+            display: inline-block;
+            background-color: var(--primarypurple);
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 2em;
+            padding: 1em 2em;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+.loginpage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--primarypurple);
+  .loginportion {
+    flex-grow: 1;
+    text-align: center;
+    .loginbox {
+      padding: 1em 2em;
+      margin: 5em 2em 2em 2em;
+      background-color: var(--white);
+      border-radius: 15%;
+      .formtitle {
+        margin-bottom: 2em;
+      }
+      .formline {
+        margin: 1em 0;
+        display: grid;
+        grid-template-columns: 30% 70%;
+        .formlabel {
+          text-align: left;
+          margin-right: 1em;
+        }
+        .forminput {
+          margin-left: 2em;
+        }
+      }
+      .formbottomlink {
+        margin: 0 0.2em;
+      }
+      .signinbtn {
+        background-color: var(--primarypurple);
+        border: none;
+        color: var(--white);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 1em;
+      }
+      .bottomlinks {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        text-decoration: underline;
+      }
+      .bottomsololink {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .loginpage {
+    .loginportion {
+      .loginbox {
+        padding: 3em 6em;
+        margin: 4em 20%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .loginpage {
+    .loginportion {
+      .loginbox {
+        margin: 4em 30%;
+      }
+    }
+  }
+}
+
+.aboutpage {
+  text-align: center;
+  margin: 2em;
+  .aboutpagetitle {
+    background-color: var(--black);
+    border-radius: 1em;
+    color: var(--white);
+    padding: 1em;
+  }
+  .aboutpageparagraphs {
+    border: 1px solid var(--primarypurple);
+    border-radius: 1em;
+    padding: 0 1em;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .aboutpage {
+    margin: 2em 25%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .aboutpage {
+    margin: 2em 30%;
+  }
+}
+
+.contactuspage {
+  text-align: center;
+  padding: 2em;
+  color: black;
+  .contactustitle {
+    margin: 0;
+    font-size: 2.25em;
+  }
+  .contactusemailaddress {
+    font-style: italic;
+    font-weight: 600;
+    background-color: var(--black);
+    color: white;
+    padding: 1em 0;
+  }
+  .contactusnotice {
+    background-color: var(--primarypurple);
+    color: white;
+    padding: 1em;
+    margin: 2em 0;
+    border-radius: 15%;
+    .contactusimportant {
+      margin: 0;
+      font-size: 1.25em;
+      padding: 1em 0 0 0;
+    }
+  }
+  .contactuslandlords {
+    margin: 3em 0;
+    background-color: var(--lightpurple);
+    padding: 1em;
+    border-radius: 15%;
+
+    .contactuslandlordtitle {
+      font-size: 1.5em;
+    }
+  }
+  .contactusstudents {
+    margin: 3em 0;
+    background-color: var(--lightpurple);
+    padding: 1em;
+    border-radius: 15%;
+
+    .contactusstudenttitle {
+      font-size: 1.5em;
+    }
+  }
+  .contactusreportabug {
+    margin: 3em 0;
+    background-color: var(--lightpurple);
+    padding: 1em;
+    border-radius: 15%;
+
+    .contactusbugtitle {
+      font-size: 1.5em;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .contactuspage {
+    margin: 0 15%;
+  }
+  .contactusemailaddress {
+    margin: 0 1em;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .contactuspage {
+    margin: 0 20%;
+  }
+  .contactusemailaddress {
+    margin: 0 5em;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .contactuspage {
+    margin: 0 30%;
+  }
+}
+
+.singleListingMoreDetailPage {
+  margin: 1em 10%;
+  .infoheadertitle {
+    text-align: center;
+  }
+  .gobackbtn {
+    background-color: var(--white);
+    border: 1px solid purple;
+    color: var(--black);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 12px;
+    border-radius: 2em;
+    padding: 0.5em;
+    height: 25%;
+  }
+  .topOfAListingDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    .imgmapdiv {
+      .frontimage {
+        max-width: 80%;
+      }
+    }
+    .viewimagesbtn {
+      background-color: var(--primarypurple);
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 2em;
+      padding: 1em 2em;
+      margin: 1em;
+      width: 50%;
+    }
+    .hideimagesbtn {
+      background-color: var(--white);
+      border: 4px solid var(--primarypurple);
+      color: var(--black);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 2em;
+      padding: 1em 2em;
+      margin: 1em;
+      width: 50%;
+    }
+    .editbtn {
+      background-color: orangered;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 2em;
+      padding: 1em 2em;
+      margin: 1em;
+      width: 50%;
+    }
+  }
+  .singleListingHouseInfo {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  .singleListingUtilitiesInfo {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  .singleListingContactInfo {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    word-wrap: break-word;
+    text-align: center;
+  }
+  .requestatourbtn {
+    background-color: var(--primarypurple);
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 2em;
+    padding: 1em 2em;
+    margin: 1em;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .singleListingMoreDetailPage {
+    margin: 3% 25%;
+    .topOfAListingDiv {
+      .addressheader {
+        font-size: 3em;
+      }
+      .imgmapdiv {
+        .frontimage {
+          max-width: 60%;
+        }
+      }
+
+      .viewimagesbtn {
+        width: 25%;
+      }
+      .hideimagesbtn {
+        width: 25%;
+      }
+      .editbtn {
+        width: 25%;
+      }
+    }
+    .rightaligntext {
+      text-align: right;
+    }
+    .leftaligntext {
+      text-align: left;
+    }
+    .requestatourbtn {
+      background-color: var(--primarypurple);
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 2em;
+      padding: 1em 2em;
+      margin: 1em;
+    }
+  }
+}
+.filterbarforsmallscreen {
+  background-color: var(--white);
+  padding: 0.5em 2em;
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2px;
+  .filterbarforsmallscreentitle {
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: -0.05em; //needs fixing
+    vertical-align: middle;
+    line-height: 2em;
+    margin: 0;
+  }
+  .filterbybedroom {
+    margin-left: 1em;
+    .filterbedroomsubtitle {
+      margin: 0.5em;
+      font-weight: 400;
+    }
+    .inputsdiv {
+      margin-left: 1em;
+      input {
+        margin: 0.5em;
+      }
+    }
+  }
+  .filterbtndiv {
+    display: flex;
+    justify-content: space-around;
+    .filterbtn {
+      background-color: var(--primarypurple);
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 14px;
+      border-radius: 2em;
+      padding: 1em;
+      margin: 1em;
+    }
+  }
+}
+.listingspage {
+  padding: 2em 12.5%;
+  background-color: var(--white);
+  .listingsside {
+    .numberofrentals {
+      margin: 0;
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+    .asinglelisting {
+      padding: 2em 0;
+    }
+  }
+  .filtersside {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .filterbarforsmallscreen {
+    display: none;
+  }
+  .listingspage {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    background-color: var(--white);
+    .listingsside {
+      .asinglelisting {
+        padding: 2em 0;
+      }
+    }
+    .filtersside {
+      display: grid;
+      grid-template-rows: 40vh;
+      .filters {
+        display: inline-block;
+        background-color: var(--grey);
+        border-radius: 10%;
+        margin: 1em 0;
+        padding: 0 2em;
+        justify-content: center;
+        .filtertitle {
+          text-align: center;
+        }
+        .filterbedroomsubtitle {
+          margin: 0.5em 0;
+        }
+        .filterbtndiv {
+          display: flex;
+          justify-content: space-around;
+          .filterbtn {
+            background-color: var(--primarypurple);
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 2em;
+            padding: 1em 2em;
+            margin: 1em;
+          }
+        }
+      }
+      .map {
+        background-color: var(--grey);
+        border-radius: 10%;
+      }
+    }
+  }
+}
+
+.entire-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#display-menu {
+  display: block;
+}
+.mobile-application {
+  display: none;
+}
+.page-portion {
+  background-color: var(--white);
+  flex-grow: 1;
+}
+section {
+  padding: 4em 2em 0 2em;
+
+  .title-subheading {
+    text-align: center;
+    color: var(--primarypurple);
+    font-weight: 600;
+    font-size: small;
+    margin: 0;
+  }
+  .title-heading {
+    text-align: center;
+    line-height: 1.2em;
+    font-weight: 800;
+    font-size: 2.4em;
+    margin: 0;
+    margin-top: 0.1em;
+    letter-spacing: -0.025em;
+    span {
+      display: block;
+    }
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+    .title-button {
+      background-color: var(--primarypurple);
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 18px;
+      border-radius: 2em;
+      padding: 1em 2em;
+      margin: 1em;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  section {
+    .title-heading {
+      font-size: 3em;
+    }
+    .button-wrapper {
+      .title-button {
+        font-size: 25px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 1em;
+      }
+    }
+  }
+  .page-portion {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    section {
+      width: auto;
+      height: auto;
+      padding: 5em 0;
+    }
+    .left-section {
+      padding-left: 25%;
+      .title-subheading {
+        display: none;
+      }
+    }
+    .mobile-application {
+      display: none;
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      padding: 0 0 4em 8em;
+      font-size: larger;
+      font-weight: 600;
+    }
+    #final-section {
+      padding-right: 25%;
+    }
+  }
+}

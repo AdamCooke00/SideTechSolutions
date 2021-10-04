@@ -2,7 +2,7 @@ import Head from "next/head"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-export default function About() {
+export default function Safety() {
 
   return (
     <div>
@@ -11,7 +11,7 @@ export default function About() {
       </Head>
       <Navbar/>
       <div className="aboutpage">
-        <h1 className="aboutpagetitle">About Student Housing Hub</h1>
+        <h1 className="aboutpagetitle">Safety</h1>
         <div className="aboutpageparagraphs">
           <p>The goal of Student Housing Hub is to be an all-in-one platform through which landlords can list their rentals and students can filter through them and reach out
             to the landlord easier.</p>

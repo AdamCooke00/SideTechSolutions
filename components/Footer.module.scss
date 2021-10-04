@@ -1,0 +1,26 @@
+.footer {
+  background-color: var(--black);
+  color: white;
+  padding: 0 3em 2em 3em;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 300;
+
+  .links {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2em 0 0 0;
+  }
+  .contactParagraph {
+    font-size: 14px;
+  }
+  .slogan {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 0.2em;
+  }
+  .trademark {
+    font-size: 10px;
+    margin: 0;
+  }
+}

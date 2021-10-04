@@ -1,75 +1,170 @@
-import React, {useRef, useState} from 'react';
-import {Form, Button, Card, Container, Alert} from "react-bootstrap"
+import React, {useRef, useState, useEffect} from 'react';
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 import {useAuth} from "../context/AuthContext"
-import Link from 'next/link'
-import firebase, {auth} from '../config/firebase-config';
+import firebase, {auth, storage} from '../config/firebase-config';
+import geocodingClient from '../config/mapbox-config';
 import {useRouter} from "next/router"
+import MultiImageInput from 'react-multiple-image-input';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function NewListing() {
-    const addressRef = useRef()
+    const [pageLoading, setPageLoading] = useState(true)
+    const [addressText, setAddressText] = useState('')
     const bedroomCountRef = useRef()
+    const bathroomCountRef = useRef()
     const totalPriceRef = useRef()
     const router = useRouter()
+    const [potentialAddresses, setPotentialAddresses] = useState([])
+    const [isAddressDisabled, setIsAddressDisabled] = useState(false)
+    const [fullAddress, setFullAddress] = useState('')
+    const [images, setImages] = useState({});
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false) //so user doesnt spam create listings.
     const {currentUser} = useAuth();
 
+      
+    const handleGeocoder = async (event) => {
+        event.preventDefault();
+        setAddressText(event.target.value)
+        if(addressText.length > 3){
+            await geocodingClient.forwardGeocode({
+                query: event.target.value,
+                limit: 4,
+                mode: "mapbox.places",
+                countries: ["ca"],
+                proximity: [-76.49569214262658,44.227861554260784],
+                types: ['address'],
+            }).send().then(response => {
+                const match = response.body;
+                console.log(match.features);
+                setPotentialAddresses(match.features);
+            }).catch(err => {
+                console.log(err);
+            }); 
+        }       
+    }
+
+    const handleSelectedAddress = (address) => {
+        setIsAddressDisabled(true);
+        setLoading(false);
+        setError('')
+        let addressSplit = address.place_name.split(",").slice(0, 2).join(",");
+        console.log(addressSplit);
+        setAddressText(addressSplit);
+        setPotentialAddresses(['']);
+        setFullAddress(address);
+    }
+
     const handleNewListing = async (event) => {
         event.preventDefault();
         setLoading(true);
-        await firebase.firestore()
-        .collection('listing')
-        .add({
-            address: addressRef.current.value,
-            bedroomCount: bedroomCountRef.current.value,
-            price: totalPriceRef.current.value,
-            author_uid: currentUser.uid
-        }).then(() => {
-            console.log("New Listing Created");
-            router.push('/')
-        }).catch((e)=> {
-            console.log("Unable to create new listing");
-            console.error(e);
-        })
-
-    
-    
-        setTimeout(() => {
-        }, 4000)
+        if(isAddressDisabled){
+            await firebase.firestore()
+            .collection('listing')
+            .add({
+                address: addressText,
+                fullAddress: fullAddress,
+                bedroomCount: bedroomCountRef.current.value,
+                bathroomCount: bathroomCountRef.current.value,
+                price: totalPriceRef.current.value,
+                author_uid: currentUser.uid
+            }).then(async (result) => {
+                await handleNewPhotos(event.target.thumbnail.files[0], result.id);
+                console.log("New Listing Created");
+                router.push('/my-account')
+            }).catch((e)=> {
+                console.log("Unable to create new listing");
+                console.error(e);
+            })
+            setTimeout(() => {
+            }, 4000)
+        } else{
+            setError("Please Select An Autocompleted Address")
+        }  
     }
 
-  return (
-      <>
-        <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-        <Card className="w-100" style={{maxWidth: "400px"}}>
-            <Card.Body>
-                <h2 className="text-center mb-4">Add a new Listing</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleNewListing}>
-                    <Form.Group id="address">
-                        <Form.Label>House Address</Form.Label>
-                        <Form.Control type="text" ref={addressRef} required/>
-                    </Form.Group>
-                    <Form.Group id="bedroomCount">
-                        <Form.Label>No. of Bedrooms</Form.Label>
-                        <Form.Control type="number" ref={bedroomCountRef} required/>
-                    </Form.Group>
-                    <Form.Group id="totalPrice">
-                        <Form.Label>Total Price</Form.Label>
-                        <Form.Control type="number" ref={totalPriceRef} required/>
-                    </Form.Group>
-                    <Button disabled={loading} className="w-100" type="submit">Create New Listing</Button>
-                </Form>
-            </Card.Body>
-        </Card>
-        <div className="w-100 text-center mt-2">
-            <Link href="/">
-                <a>Back to Home</a>
-            </Link>
+    const handleNewPhotos = async (file, houseId) => { 
+        let thumbnailRef = storage.ref(`rentalPhotos/${currentUser.uid}/${houseId}/thumbnail`);
+        console.log(file)
+        
+        await thumbnailRef.put(file).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+            }).catch(e => {
+            console.log(e);
+            });
+
+        for(var key in images){
+            let additionalPhotoRef = storage.ref(`rentalPhotos/${currentUser.uid}/${houseId}/${uuidv4()}`);
+            await additionalPhotoRef.putString(images[key], 'data_url').then((snapshot) => {
+                console.log('Uploaded Once');
+                }).catch(e => {
+                console.log('FAILED');
+                console.log(e);
+                }); 
+        }
+             
+    }
+
+    useEffect(async () => {
+        currentUser && currentUser.emailVerified ? setPageLoading(false) : router.push("/login");
+    }, []);
+
+    if(pageLoading){
+        return <p>Loading Page...</p>
+    }
+
+    return (
+        <div className="newlistingpage">
+        <Navbar/>
+        <div className="newlistingpageportion">
+            <div className="newlistingformdiv">
+                <h2 className="newlistingformtitle">Add New Listing</h2>
+                {error && <p style={{backgroundColor: "red"}}>{error}</p>}
+                <form onSubmit={handleNewListing}>
+                    <div className="newlistingformline">
+                        <label className="newlistingformlabel">House Address</label>
+                        <input type="text" value={addressText} onChange={handleGeocoder} disabled={isAddressDisabled} required/>
+                        {potentialAddresses.map(address => <p className="paragraphlikelink" onClick={() => handleSelectedAddress(address)} key={address.id}>{address.place_name}</p>)}
+                        {isAddressDisabled && <button onClick={() => {setIsAddressDisabled(false);setLoading(false);}}>Change Address</button>}
+                    </div>
+                    <div className="newlistingformline">
+                        <label className="newlistingformlabel">No. of Bedrooms</label>
+                        <input type="number" ref={bedroomCountRef} required/>
+                    </div>
+                    <div className="newlistingformline">
+                        <label className="newlistingformlabel">No. of Bathrooms</label>
+                        <input type="number" ref={bathroomCountRef} required/>
+                    </div>
+                    <div className="newlistingformline">
+                        <label className="newlistingformlabel">Total Price</label>
+                        <input type="number" ref={totalPriceRef} required/>
+                    </div>
+                    <div className="newlistingformline">
+                        <p className="addthumbnailtitle">Add Thumbnail Photo</p>
+                        <input type="file" id="thumbnail" required/>
+                    </div>
+                    <div className="newlistingformline">
+                        <p className="addthumbnailtitle">Add Additional Photos</p>
+                        <p>6 Additional Max</p>
+
+                        <MultiImageInput
+                        images={images}
+                        max={6}
+                        setImages={setImages}
+                        allowCrop={false}
+                        theme={"light"}
+                        handleError={(e) => console.log(e)}
+                    />
+                    </div>
+                    <button className="createlistingbtn" disabled={loading} type="submit">Create New Listing</button>
+                </form>
+            </div>
         </div>
-        </Container>
-    </>
-  )
+        <Footer/>
+    </div>
+    )
 }
 
 // export async function getServerSideProps(context) {

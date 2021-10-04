@@ -1,0 +1,105 @@
+.listitem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  p {
+    margin: 0.25em 0;
+  }
+  .moreinfobtn {
+    background-color: var(--primarypurple);
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 2em;
+    padding: 1em 2em;
+    margin: 1em;
+  }
+  .editbtn {
+    background-color: orangered;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 2em;
+    padding: 1em 2em;
+    margin-bottom: 1em;
+  }
+  .address {
+    font-weight: 600;
+  }
+  .landlord {
+    font-size: small;
+  }
+  .houseinfo {
+    margin: 1em 0 0 0;
+  }
+  .bedbath {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .pricediv {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    // justify-content: space-around;
+    .totalprice {
+      font-style: italic;
+    }
+    .price {
+      font-weight: 800;
+      font-size: large;
+    }
+    .permonth {
+      font-size: small;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .listitem {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: stretch;
+    text-align: left;
+    .picture {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-height: 280px;
+    }
+    .infoside {
+      padding-left: 15%;
+    }
+    .moreinfobtn {
+      margin-bottom: 0;
+    }
+    .houseinfo {
+      margin: 1em 0;
+    }
+    .bedbath {
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
+    .pricediv {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      .totalprice {
+        font-style: italic;
+      }
+      .price {
+        font-weight: 800;
+        font-size: large;
+      }
+      .permonth {
+        font-size: small;
+      }
+    }
+  }
+}

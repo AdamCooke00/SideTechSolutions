@@ -1,25 +1,53 @@
 import Link from 'next/link';
-import React from 'react';
-import { Button, Image, Item, Label} from "semantic-ui-react";
-function ListingItem({address, id, price, bedrooms}) {
+import React, { useEffect, useState } from 'react';
+import styles from './ListingItem.module.scss';
+import {useAuth} from "../context/AuthContext"
+import { storage } from '../config/firebase-config';
+function ListingItem({address, id, price, bedrooms, bathrooms, authorid}) {
+    const {currentUser} = useAuth();
+    const [imgUrl, setImgUrl] = useState('');
+
+    useEffect(async () => {
+        let storageRef = storage.ref("rentalPhotos/"+ authorid +"/"+id+"/thumbnail");
+        await storageRef.getDownloadURL()
+            .then((url) => {
+                setImgUrl(url);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
 
     return (
-            <Item>
-                <Item.Image src="https://picsum.photos/200"/>
-                <Item.Content>
-                    <Item.Header>{address}</Item.Header>
-                    <Item.Meta>
-                        <span className='cinema'>Property Company</span>
-                    </Item.Meta>
-                    <Item.Description>Bedrooms: {bedrooms} Price: ${price} or ${parseInt(price/bedrooms)}/person</Item.Description>
-                    <Item.Extra>
+            <div className={styles.listitem}>
+                <img className={styles.picture} src={imgUrl}/>
+                <div className={styles.infoside}>
+                    <p className={styles.address}>{address}</p>
+                    <p className={styles.landlord}>Property Company</p>
+                    <div className={styles.houseinfo}>
+                        <div className={styles.bedbath}>
+                            <p>Beds: {bedrooms}</p>
+                            <p>Baths: {bathrooms}</p>
+                        </div>
+                        <div className={styles.pricediv}>
+                            <p><span className={styles.price}>${parseInt(price/bedrooms)}</span><span className={styles.permonth}>/month per person</span></p>
+                            <p className={styles.totalprice}><span className={styles.price}>${price}</span><span className={styles.permonth}>/month total</span></p>
+                        </div>
+                    </div>
+                    
+                    <div>
                         <Link href={`/listings/${id}`}>
-                            <Button primary floated='right'>More Info</Button>
+                            <button className={styles.moreinfobtn}>More Info</button>
                         </Link>
-                        <Label>Sponsored</Label>
-                    </Item.Extra>
-                </Item.Content>
-            </Item>
+                        {currentUser && currentUser.uid == authorid && 
+                        <Link href={`/listings/${id}/edit`}>
+                            <button className={styles.editbtn}>Edit</button>
+                        </Link>
+                        }
+                        {/* <p>Sponsored</p> */}
+                    </div>
+                </div>
+            </div>
     );
 }
 

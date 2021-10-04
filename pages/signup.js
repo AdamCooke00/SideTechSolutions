@@ -1,5 +1,6 @@
-import React, {useRef, useState} from 'react';
-import {Form, Button, Card, Container, Alert} from "react-bootstrap"
+import React, {useRef, useState, useEffect} from 'react';
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 import {useAuth} from "../context/AuthContext"
 import Link from 'next/link'
 import { useRouter } from "next/router"
@@ -8,8 +9,9 @@ export default function SignUp() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmpasswordRef = useRef()
-    const {signup} = useAuth()
+    const {currentUser, signup} = useAuth()
     const [error, setError] = useState('')
+    const [pageLoading, setPageLoading] = useState(true)
     const [loading, setLoading] = useState(false) //so user doesnt spam signup and make multiple accounts. shouldnt be needed cuz of email restriction anyway but nonetheless
     const router = useRouter()
 
@@ -20,10 +22,12 @@ export default function SignUp() {
         }
         setError('')
         setLoading(true)
-        signup(emailRef.current.value, passwordRef.current.value).then((userCredential) => {
+        signup(emailRef.current.value, passwordRef.current.value).then((res) => {
             // Signed in 
-            var user = userCredential.user;
-            router.push('/')
+            res.user.sendEmailVerification({
+            url: "http://localhost:3000/my-account",
+            })
+            router.push('/my-account')
             // ...
           }).catch((error) => {
             var errorCode = error.code;
@@ -33,41 +37,48 @@ export default function SignUp() {
         setLoading(false)
     }
 
+    useEffect(async () => {
+        currentUser ? router.push("/my-account") : setPageLoading(false);
+      }, []);
+    
+      if(pageLoading){
+        return <p>Loading Page...</p>
+    }
+
   return (
-      <>
-        <Link href="/">
-            <a>Home</a>
-        </Link>
-        <Container className="d-flex align-items-center justify-content-center" style={{minHeight: "100vh"}}>
-            
-        <Card className="w-100" style={{maxWidth: "400px"}}>
-            <Card.Body>
-                <h2 className="text-center mb-4">Sign Up</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group id="email">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" ref={emailRef} required/>
-                    </Form.Group>
-                    <Form.Group id="password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" ref={passwordRef} required/>
-                    </Form.Group>
-                    <Form.Group id="confirmpassword">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" ref={confirmpasswordRef} required/>
-                    </Form.Group>
-                    <Button disabled={loading} className="w-100" type="submit">Sign Up</Button>
-                </Form>
-            </Card.Body>
-        </Card>
-        <div className="w-100 text-center mt-2">
-            Already have an account?
-            <Link href="/login">
-                <a>Login</a>
-            </Link>
+      <div className="loginpage">
+        <Navbar/>
+        <div className="loginportion">
+            <div className="loginbox">
+                <p>Please <strong>only create an account if you are a Landlord</strong>. We will be adding student accounts in the future.</p>
+                <h2 className="formtitle">Create Account</h2>
+                {error && <p>{error}</p>}
+                <form onSubmit={handleSubmit}>
+                    <div className="formline">
+                        <label className="formlabel">Email</label>
+                        <input className="forminput" type="email" ref={emailRef} required/>
+                    </div>
+                    
+                    <div className="formline">
+                        <label className="formlabel">Password</label>
+                        <input className="forminput" type="password" ref={passwordRef} required/>
+                    </div>
+                    
+                    <div className="formline">
+                        <label className="formlabel">Confirm Password</label>
+                        <input className="forminput" type="password" ref={confirmpasswordRef} required/>
+                    </div>
+                    <button className="signinbtn" disabled={loading} type="submit">Sign Up</button>
+                </form>
+                <p>Already have an account?</p>
+                <div className="bottomsololink"> 
+                    <Link href="/login">
+                        <a>Login</a>
+                    </Link>
+                </div>
+            </div>
         </div>
-        </Container>
-    </>
+        <Footer/>
+    </div>
   )
 }
