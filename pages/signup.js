@@ -25,7 +25,7 @@ export default function SignUp() {
         signup(emailRef.current.value, passwordRef.current.value).then((res) => {
             // Signed in 
             res.user.sendEmailVerification({
-            url: "http://localhost:3000/my-account",
+            url: "https://student-housing-hub.vercel.app/my-account",
             })
             router.push('/my-account')
             // ...

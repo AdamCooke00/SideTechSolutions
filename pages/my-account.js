@@ -30,7 +30,7 @@ export default function MyAccount() {
   function sendEmailVerification(e){
     e.preventDefault()
     currentUser.sendEmailVerification({
-      url: "http://localhost:3000/my-account",
+      url: "https://student-housing-hub.vercel.app/my-account",
     }).then(() => {
       console.log("Email Sent Successful");
       setSentVerification(true)

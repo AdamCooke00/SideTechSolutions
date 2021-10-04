@@ -37,7 +37,7 @@ export default function Contact() {
 
           <div className="contactusreportabug">
             <h3 className="contactusbugtitle">Report A Bug!</h3>
-            <p>Found a bug in our platform?<br/>Email us!</p>
+            <p>Found a bug on our platform?<br/>Email us!</p>
             <p className="contactusemailaddress">bug@studenthousinghub.ca</p>
             <p>If possible, please leave a detailed explanation of the problem and how to recreate it.</p>
           </div>
