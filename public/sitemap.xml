@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://studenthousinghub.ca</loc>
+        <loc>https://studenthousinghub.ca/</loc>
         <changefreq>daily</changefreq>
-        <priority>0.7</priority>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://studenthousinghub.ca/listings</loc>
+        <changefreq>hourly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://studenthousinghub.ca/about</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    <url>
+        <loc>https://studenthousinghub.ca/contact</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://studenthousinghub.ca/safety</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    <url>
+        <loc>https://studenthousinghub.ca/login</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
     </url>
 </urlset>
