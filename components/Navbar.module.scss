@@ -19,11 +19,10 @@
       vertical-align: middle;
       line-height: 2em;
     }
-
-    ion-icon {
+    svg {
+      width: 30px;
       color: var(--black);
       cursor: pointer;
-      font-size: 2em;
     }
   }
 
@@ -101,10 +100,12 @@
         font-size: 18px;
       }
     }
-    ion-icon {
+    svg {
       color: var(--white);
       cursor: pointer;
       font-size: 2em;
+      display: block;
+      margin-left: 85%;
     }
   }
 }
@@ -117,7 +118,7 @@
       .title {
         font-size: 1.1em;
       }
-      ion-icon {
+      svg {
         display: none;
       }
       nav {

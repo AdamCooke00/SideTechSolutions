@@ -1,21 +1,22 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Script from 'next/script';
 import Link from 'next/link';
-
-function HomePage(){
+import Head from "next/head"
+export default function HomePage(){
   return (
-    <div className="entire-page">
+    <main className="entire-page">
+      <Head>
+        <title>Student Housing Hub</title>
+      </Head>
       <Navbar/>
       <div className="page-portion">
         <section className='left-section'>
           <p className="title-subheading">By Students, For Students</p>
-          <h2 className="title-heading">A Simpler Way<span>To Find Housing</span><span>For Students.</span></h2>
+          <h1 className="title-heading">A Simpler Way<span>To Find Housing</span><span>For Students.</span></h1>
           <div className='button-wrapper'>
             <Link href='/listings'><button className='title-button'>Find A House</button></Link>
           </div>
         </section>
-
         <section id="final-section">
           <h2 className="title-heading">A Landlord<span>Looking To List A</span><span>Student House ?</span></h2>
           <div className='button-wrapper'>
@@ -25,8 +26,6 @@ function HomePage(){
         <p className="mobile-application">Mobile Application Coming Soon!</p>
       </div>
       <Footer/>
-
-    </div>
+    </main>
   ) 
 }
-export default HomePage

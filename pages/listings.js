@@ -72,58 +72,58 @@ export default function Home() {
               <div className="inputsdiv">
                 <input
                   type="radio"
-                  id="1"
+                  id="filterCheckBoxNo1"
                   value='1'
                   name="bedFilterSearch"
                   checked={filters.bedrooms === 1}
                   onChange={() => setFilters({bedrooms: 1})}
                 />
-                <label>1</label>
+                <label for="filterCheckBoxNo1">1</label>
                 <input
                   type="radio"
-                  id="2"
+                  id="filterCheckBoxNo2"
                   value='2'
                   name="bedFilterSearch"
                   checked={filters.bedrooms === 2}
                   onChange={() => setFilters({bedrooms: 2})}
                 />
-                <label>2</label>
+                <label for="filterCheckBoxNo2">2</label>
                 <input
                   type="radio"
-                  id="3"
+                  id="filterCheckBoxNo3"
                   value='3'
                   name="bedFilterSearch"
                   checked={filters.bedrooms === 3}
                   onChange={() => setFilters({bedrooms: 3})}
                 />
-                <label>3</label>
+                <label for="filterCheckBoxNo3">3</label>
                 <input
                   type="radio"
-                  id="4"
+                  id="filterCheckBoxNo4"
                   value='4'
                   name="bedFilterSearch"
                   checked={filters.bedrooms === 4}
                   onChange={() => setFilters({bedrooms: 4})}
                 />
-                <label>4</label>
+                <label for="filterCheckBoxNo4">4</label>
                 <input
                   type="radio"
-                  id="5"
+                  id="filterCheckBoxNo5"
                   value='5'
                   name="bedFilterSearch"
                   checked={filters.bedrooms === 5}
                   onChange={() => setFilters({bedrooms: 5})}
                 />
-                <label>5</label>
+                <label for="filterCheckBoxNo5">5</label>
                 <input
                   type="radio"
-                  id="6"
+                  id="filterCheckBoxNo6"
                   value='6'
                   name="bedFilterSearch"
                   checked={filters.bedrooms === 6}
                   onChange={() => setFilters({bedrooms: 6})}
                 />
-                <label>6</label>
+                <label for="filterCheckBoxNo6">6</label>
               </div>
             </div>
             <div className="filterbtndiv">
@@ -160,58 +160,58 @@ export default function Home() {
                     <h4 className="filterbedroomsubtitle">By Bedroom</h4>
                     <input
                       type="radio"
-                      id="1"
+                      id="filterCheckBoxDesktopNo1"
                       value='1'
                       name="bedFilterSearch"
                       checked={filters.bedrooms === 1}
                       onChange={() => setFilters({bedrooms: 1})}
                     />
-                    <label>1</label>
+                    <label for="filterCheckBoxDesktopNo1">1</label>
                     <input
                       type="radio"
-                      id="2"
+                      id="filterCheckBoxDesktopNo2"
                       value='2'
                       name="bedFilterSearch"
                       checked={filters.bedrooms === 2}
                       onChange={() => setFilters({bedrooms: 2})}
                     />
-                    <label>2</label>
+                    <label for="filterCheckBoxDesktopNo2">2</label>
                     <input
                       type="radio"
-                      id="3"
+                      id="filterCheckBoxDesktopNo3"
                       value='3'
                       name="bedFilterSearch"
                       checked={filters.bedrooms === 3}
                       onChange={() => setFilters({bedrooms: 3})}
                     />
-                    <label>3</label>
+                    <label for="filterCheckBoxDesktopNo3">3</label>
                     <input
                       type="radio"
-                      id="4"
+                      id="filterCheckBoxDesktopNo4"
                       value='4'
                       name="bedFilterSearch"
                       checked={filters.bedrooms === 4}
                       onChange={() => setFilters({bedrooms: 4})}
                     />
-                    <label>4</label>
+                    <label for="filterCheckBoxDesktopNo4">4</label>
                     <input
                       type="radio"
-                      id="5"
+                      id="filterCheckBoxDesktopNo5"
                       value='5'
                       name="bedFilterSearch"
                       checked={filters.bedrooms === 5}
                       onChange={() => setFilters({bedrooms: 5})}
                     />
-                    <label>5</label>
+                    <label for="filterCheckBoxDesktopNo5">5</label>
                     <input
                       type="radio"
-                      id="6"
+                      id="filterCheckBoxDesktopNo6"
                       value='6'
                       name="bedFilterSearch"
                       checked={filters.bedrooms === 6}
                       onChange={() => setFilters({bedrooms: 6})}
                     />
-                    <label>6</label>
+                    <label for="filterCheckBoxDesktopNo6">6</label>
                   </div>
                   <div className="filterbtndiv">
                     <button className="filterbtn" onClick={handleFilters}>Apply Filters</button>

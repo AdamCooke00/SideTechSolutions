@@ -20,7 +20,7 @@ function ListingItem({address, id, price, bedrooms, bathrooms, authorid}) {
 
     return (
             <div className={styles.listitem}>
-                <img className={styles.picture} src={imgUrl}/>
+                <img alt={address} className={styles.picture} src={imgUrl}/>
                 <div className={styles.infoside}>
                     <p className={styles.address}>{address}</p>
                     <p className={styles.landlord}>Property Company</p>

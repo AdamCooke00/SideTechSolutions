@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styles from './Navbar.module.scss';
 import React, {useState} from 'react';
-import Script from 'next/script';
 import {useAuth} from "../context/AuthContext"
 
 function Navbar() {
@@ -22,16 +21,13 @@ function Navbar() {
 
     return (
             <div className={styles.navbar}>
-                <Script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"/>
-                <Script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"/> 
                 <div className={styles.container}>
                     <Link href='/'><a className={styles.title}>Student Housing Hub</a></Link>
-                    <ion-icon onClick={showNav} name="menu-outline"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" onClick={showNav} viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
                     <div onClick={hideNav} className={seeThroughToggle}>
-
                     </div>
                     <nav className={navToggler}>
-                        <ul className={styles.ulList}>
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={hideNav} viewBox="0 0 512 512"><title>Close</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>                        <ul className={styles.ulList}>
                             <Link href='/'><li>Home</li></Link>
                             <Link href='/listings'><li>Rentals</li></Link>
                             <Link href='/contact'><li>Contact</li></Link>
@@ -39,7 +35,6 @@ function Navbar() {
                                 <Link href='/my-account'><li className={styles.myprofilebtn}>My Profile</li></Link>
                             : <Link href="/login"><li className={styles.loginbtn}>Login</li></Link>}
                         </ul>
-                        <ion-icon onClick={hideNav} name="close-outline"/>
                     </nav>
                 </div>
             </div>
