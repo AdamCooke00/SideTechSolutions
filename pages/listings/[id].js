@@ -7,9 +7,14 @@ import {db} from "../../config/firebase-config"
 import {useAuth} from "../../context/AuthContext"
 import {storage} from '../../config/firebase-config';
 import React, { useEffect, useState } from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import "swiper/css/navigation"
+import "swiper/css/navigation"
+import SwiperCore, {
+    Pagination,Navigation
+  } from 'swiper';
+SwiperCore.use([Pagination,Navigation]);
 
 export async function getStaticProps({ params: {id} }) {
     // params contains the post `id`.
@@ -52,7 +57,7 @@ export default function Listing({data}) {
     const [imgUrl, setImgUrl] = useState('');
     const [viewImages, setViewImages] = useState(false);
     const [additionaImages, setAdditionalImages] = useState([]);
-    
+
 
     useEffect(async () => {
         console.log(data)
@@ -93,13 +98,15 @@ export default function Listing({data}) {
                         <img className="frontimage" src={imgUrl}/>
                         {/* <Map/> */}
                     </div>
-                    {viewImages && <Carousel>
-                    {additionaImages.map(image =>
-                        <div key={image}>
-                            <img src={image} />
-                        </div>
-                    )}
-                    </Carousel> }
+                    {viewImages && <Swiper pagination={{"type": "fraction"}} navigation={true} className="swiper"> 
+                                    {additionaImages.map(image =>
+                                        <SwiperSlide key={image}>
+                                            <img src={image} />
+                                        </SwiperSlide>
+                                        )} 
+                                    </Swiper>
+                                     
+                     }
                     {viewImages ? <button className="hideimagesbtn" onClick={() => setViewImages(false)}>Hide Images</button>  : <button className="viewimagesbtn" onClick={() => setViewImages(true)}>View Images</button> }
                     
                     {currentUser && currentUser.uid === data.author_uid && <Link href={`/listings/${id}/edit`}><button className="editbtn">Edit Rental</button></Link> }
