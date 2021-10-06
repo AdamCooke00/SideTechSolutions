@@ -1,42 +1,45 @@
 import Head from 'next/head'
-import Script from 'next/script';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Map from '../components/Map'
 import ListingItem from "../components/ListingItem"
-import fire from '../config/firebase-config';
+import {db} from "../config/firebase-config"
 import { useState, useEffect } from 'react';
-import Link from "next/link"
-import {useAuth} from "../context/AuthContext"
 
-export default function Home() {
-  const [listings, setListings] = useState([]);
-  const [filteredListings, setFilteredListings] = useState([])
-  const {currentUser, logout} = useAuth()
-  const [error, setError] = useState('')
+export async function getStaticProps() {
+  console.log("Static Props")
+  let listingData = []
+  await db.collection('listing').get()
+  .then(querySnapshot => {
+    querySnapshot.docs.forEach(doc => {
+      listingData.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    })
+  })
+  return {
+    props: { queriedListings: listingData },
+    revalidate: 600,
+    notFound: false,
+  }
+}
+
+
+export default function Home({queriedListings}) {
+  const [listings, setListings] = useState(queriedListings);
+  const [filteredListings, setFilteredListings] = useState(queriedListings);
   const [filters, setFilters] = useState([]);
   const [filterMessage, setFilterMessage] = useState();
-
-  function handleLogout(e){
-    e.preventDefault()
-    setError('')
-    logout().then(() => {
-      setError("Logout Successful");
-    }).catch((error) => {
-      setError(error);
-    });
-  }
 
   const handleFilters = (e) => {
     e.preventDefault()
     if (filters.bedrooms){
       let filtList = listings.filter(list => list.bedroomCount == filters.bedrooms)
       setFilteredListings(filtList)
-      setFilterMessage(`Bedroom filter: ${filters.bedrooms} has been applied`)
+      setFilterMessage(`Filter: ${filters.bedrooms} has been applied`)
     }
   }
-
-
   const clearFilters = (e) => {
     e.preventDefault()
     setFilters({})
@@ -45,22 +48,12 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fire.firestore()
-      .collection('listing')
-      .onSnapshot(snap => {
-        const allListings = snap.docs.map(listing => ({
-          id: listing.id,
-          ...listing.data()
-        }));
-        setListings(allListings);
-        setFilteredListings(allListings);
-      });
   }, []);
 
   return (
-    <div>
+    <main className="entire-page">
       <Head>
-        <title>Student Housing Hub</title>
+        <title>Student Housing Hub Listings</title>
         <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css' rel='stylesheet' />
       </Head>
       <Navbar/>
@@ -130,20 +123,15 @@ export default function Home() {
               <button className="filterbtn" onClick={handleFilters}>Apply Filters</button>
               <button className="filterbtn" onClick={clearFilters}>Clear Filters</button>
             </div>
+            {filterMessage && <p className="filtermessage">{filterMessage}</p>}
         </form>
       </div>
-      {error && <p>{error}</p>}
 
-      {filterMessage &&
-        <p>{filterMessage}</p>
-      }  
+        
 
-      
-      {/* {currentUser && <CreatePost/> } */}
         <div className="listingspage">
-          <Script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"/>
-          <Script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"/> 
           <div className="listingsside">
+          
             <p className="numberofrentals">{filteredListings.length} Rentals</p>
             {filteredListings.map(listing =>
               <div key={listing.id} className="asinglelisting">
@@ -154,7 +142,6 @@ export default function Home() {
           <div className="filtersside">
             <div className="filters">
               <h3 className="filtertitle">Filters</h3>
-              <p>Current Filters: {filters && filters.bedrooms} </p>
               <form> 
                   <div className="filterbybedroom">
                     <h4 className="filterbedroomsubtitle">By Bedroom</h4>
@@ -217,6 +204,7 @@ export default function Home() {
                     <button className="filterbtn" onClick={handleFilters}>Apply Filters</button>
                     <button className="filterbtn" onClick={clearFilters}>Clear Filters</button>
                   </div>
+                  {filterMessage && <p className="filtermessage">{filterMessage}</p>}
               </form>
             </div>
             {/* <Map/> */}
@@ -224,6 +212,6 @@ export default function Home() {
         </div>
         
       <Footer/>
-    </div>
+    </main>
   )
 }

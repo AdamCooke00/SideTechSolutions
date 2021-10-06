@@ -191,6 +191,9 @@ export default function EditListing() {
                             handleError={(e) => console.log(e)}
                             />
                         </div>
+                        <div className="editlistingformline notice">
+                            <p>*Please note it can take up to 10 minutes for your new listing to appear on the rentals page*</p>
+                        </div>
                         <button disabled={loading} className="editlistingbtn" type="submit">Confirm Edits</button>
                     </form>
 

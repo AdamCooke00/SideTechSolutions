@@ -4,9 +4,9 @@ import Footer from "../components/Footer"
 
 export default function Contact() {
     return (
-      <div>
+      <div className="entire-page">
         <Head>
-          <title>Student Housing Hub</title>
+          <title>Student Housing Hub Contact</title>
         </Head>
         <Navbar/>
         <div className="contactuspage">

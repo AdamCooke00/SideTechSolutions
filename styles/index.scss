@@ -42,6 +42,12 @@
           height: 2em;
         }
       }
+      .notice {
+        background-color: var(--black);
+        color: var(--white);
+        padding: 0.5em 1em;
+        font-weight: 600;
+      }
       .editlistingbtn {
         background-color: var(--primarypurple);
         border: none;
@@ -123,6 +129,12 @@
           text-decoration: underline;
           margin: 0.5em 0;
         }
+      }
+      .notice {
+        background-color: var(--black);
+        color: var(--white);
+        padding: 0.5em 1em;
+        font-weight: 600;
       }
       .createlistingbtn {
         background-color: var(--primarypurple);
@@ -454,6 +466,7 @@
 .aboutpage {
   text-align: center;
   margin: 2em;
+  flex-grow: 1;
   .aboutpagetitle {
     background-color: var(--black);
     border-radius: 1em;
@@ -483,6 +496,7 @@
 .contactuspage {
   text-align: center;
   padding: 2em;
+  flex-grow: 1;
   color: black;
   .contactustitle {
     margin: 0;
@@ -758,9 +772,18 @@
       margin: 1em;
     }
   }
+  .filtermessage {
+    margin-left: 1em;
+    margin-right: 1em;
+    padding: 5px 0;
+    background-color: black;
+    text-align: center;
+    color: var(--white);
+  }
 }
 .listingspage {
   padding: 2em 12.5%;
+  flex-grow: 1;
   background-color: var(--white);
   .listingsside {
     .numberofrentals {
@@ -804,6 +827,7 @@
         }
         .filterbedroomsubtitle {
           margin: 0.5em 0;
+          font-weight: 400;
         }
         .filterbtndiv {
           display: flex;
@@ -821,6 +845,14 @@
             padding: 1em 2em;
             margin: 1em;
           }
+        }
+        .filtermessage {
+          margin-left: 1em;
+          margin-right: 1em;
+          padding: 5px 0;
+          background-color: black;
+          text-align: center;
+          color: var(--white);
         }
       }
       .map {

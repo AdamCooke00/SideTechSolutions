@@ -5,9 +5,9 @@ import Footer from "../components/Footer"
 export default function About() {
 
   return (
-    <div>
+    <div className="entire-page">
       <Head>
-        <title>Student Housing Hub</title>
+        <title>Student Housing Hub About</title>
       </Head>
       <Navbar/>
       <div className="aboutpage">

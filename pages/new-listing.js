@@ -158,6 +158,9 @@ export default function NewListing() {
                         handleError={(e) => console.log(e)}
                     />
                     </div>
+                    <div className="newlistingformline notice">
+                        <p>*Please note it can take up to 10 minutes for your new listing to appear on the rentals page*</p>
+                    </div>
                     <button className="createlistingbtn" disabled={loading} type="submit">Create New Listing</button>
                 </form>
             </div>
