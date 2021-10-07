@@ -3,9 +3,8 @@ import Link from "next/link"
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import Map from '../../components/Map'
-import {db} from "../../config/firebase-config"
+import {db, storage} from "../../config/firebase-config"
 import {useAuth} from "../../context/AuthContext"
-import {storage} from '../../config/firebase-config';
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -15,14 +14,31 @@ import SwiperCore, {
     Pagination,Navigation
   } from 'swiper';
 SwiperCore.use([Pagination,Navigation]);
+global.XMLHttpRequest = require("xhr2");
 
-export async function getStaticProps({ params: {id} }) {
-    // params contains the post `id`.
-    // If the route is like /posts/1, then params.id is 1
-    console.log("Static Props")
-    const doc = await db.collection('listing').doc(id).get()
-        //TODO: get who the landlord is from the author uid on the doc.data object and send their username instead of the authoruid
-        if (!doc.exists){
+export async function getStaticProps({ params: {id} }) {    
+    return await db.collection('listing').doc(id).get()
+    .then(async docSnapshot => {
+        if(docSnapshot.exists){
+            let listResult = await storage.ref("rentalPhotos/"+ docSnapshot.data().author_uid + "/" + id).listAll()
+            let photos = {}
+            photos.extraPictures = []
+            for(const reference of listResult.items){
+                if(reference.name != "thumbnail"){
+                    let url = await reference.getDownloadURL();
+                    photos.extraPictures.push(url)
+                } else {
+                    photos.thumbnail = await reference.getDownloadURL()
+                } 
+            } 
+            return {
+                props: {
+                    data: docSnapshot.data(),
+                    photos,
+                },
+                revalidate: 1800,
+            }
+        } else {
             return {
                 redirect: {
                     destination: '/listings',
@@ -30,27 +46,18 @@ export async function getStaticProps({ params: {id} }) {
                 },
             }
         }
-
-        return {
-            props: {
-                data: doc.data(),
-            },
-            revalidate: 180,
-        }
-    }
+    })
+}
 
 export async function getStaticPaths() {
     console.log("Static Paths")
     return {
-      // Only `/posts/1` and `/posts/2` are generated at build time
       paths: [],
-      // Enable statically generating additional pages
-      // For example: `/posts/3`
-      fallback: 'blocking',
+      fallback: "blocking",
     }
   }
 
-export default function Listing({data}) {
+export default function Listing({data, photos}) {
     const router = useRouter()
     const {currentUser} = useAuth();
     const { id } = router.query
@@ -60,33 +67,12 @@ export default function Listing({data}) {
 
 
     useEffect(async () => {
-        console.log(data)
-        let listRef = storage.ref("rentalPhotos/"+ data.author_uid + "/" + id);
-        await listRef.listAll()
-            .then((res) => {
-                res.items.forEach(async (itemRef) => {
-                    if(itemRef.name != "thumbnail"){
-                        await itemRef.getDownloadURL()
-                        .then( url => {
-                            setAdditionalImages(additionaImages => [...additionaImages, url]);
-                        }).catch((error) => {
-                            console.log(error);
-                        });
-                    } else {
-                        await itemRef.getDownloadURL()
-                        .then( url => {
-                            setImgUrl(url);
-                        }).catch((error) => {
-                            console.log(error);
-                        });
-                    }
-                });
-            }).catch((error) => {
-                console.log(error);
-
-            });
+        if(photos){
+            setImgUrl(photos.thumbnail);
+            setAdditionalImages(photos. extraPictures);
+        }
     }, []);
-
+    
     return (
         <div>
             <Navbar/>
