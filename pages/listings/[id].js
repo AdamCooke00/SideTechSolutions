@@ -69,7 +69,7 @@ export default function Listing({data, photos}) {
     useEffect(async () => {
         if(photos){
             setImgUrl(photos.thumbnail);
-            setAdditionalImages(photos. extraPictures);
+            setAdditionalImages(photos.extraPictures);
         }
     }, []);
     
