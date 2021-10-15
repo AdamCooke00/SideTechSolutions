@@ -3,6 +3,15 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  .picture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    max-width: 247px;
+    max-height: 247px;
+  }
   p {
     margin: 0.25em 0;
   }
@@ -72,7 +81,10 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      max-height: 280px;
+      margin-top: auto;
+      margin-bottom: auto;
+      max-width: 247px;
+      max-height: 247px;
     }
     .infoside {
       padding-left: 15%;
