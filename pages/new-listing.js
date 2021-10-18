@@ -75,6 +75,7 @@ export default function NewListing() {
                     parkingSpaces: parkingSpacesState,
                     utilities: utilitesState,
                     internet: internetState,
+                    landlord: currentUser.email,
                     author_uid: currentUser.uid
                 }).then(async (result) => {
                     await handleNewPhotos(event.target.thumbnail.files[0], result.id);
@@ -220,6 +221,7 @@ export default function NewListing() {
                             <p>*Please note it can take up to 10 minutes for your new listing to appear on the rentals page*</p>
                         </div>
                         <button className="createlistingbtn" disabled={loading} type="submit">Create New Listing</button>
+                        {loading && <div class="loader"></div>}
                     </form>
                 </div>
             </div>

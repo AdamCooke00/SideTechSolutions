@@ -23,11 +23,11 @@ function Navbar() {
             <div className={styles.navbar}>
                 <div className={styles.container}>
                     <Link href='/'><a className={styles.title}>Student Housing Hub</a></Link>
-                    <svg xmlns="http://www.w3.org/2000/svg" onClick={showNav} height="30px" viewBox="0 0 512 512"><path stroke="black" stroke-width="40" d="M80 160h352M80 256h352M80 352h352"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" onClick={showNav} height="30px" viewBox="0 0 512 512"><path stroke="black" strokeWidth="40" d="M80 160h352M80 256h352M80 352h352"/></svg>
                     <div onClick={hideNav} className={seeThroughToggle}>
                     </div>
                     <nav className={navToggler}>
-                        <svg xmlns="http://www.w3.org/2000/svg" onClick={hideNav} height="30px" viewBox="0 0 512 512"><path stroke="white" stroke-width="48" d="M368 368L144 144M368 144L144 368"/></svg>                        <ul className={styles.ulList}>
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={hideNav} height="30px" viewBox="0 0 512 512"><path stroke="white" strokeWidth="48" d="M368 368L144 144M368 144L144 368"/></svg>                        <ul className={styles.ulList}>
                             <Link href='/'><li>Home</li></Link>
                             <Link href='/listings'><li>Rentals</li></Link>
                             <Link href='/contact'><li>Contact</li></Link>

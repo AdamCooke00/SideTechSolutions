@@ -84,7 +84,7 @@ export default function MyAccount() {
                 <h1 className="myaccounttitle">{currentUser.email}</h1>
                 <h4 className="myaccountsubtitle">Landlord</h4>
               </div>   
-              {isEditingProfile? <button className="doneeditprofilebtn" onClick={() => setIsEditingProfile(false)}>Done Edits</button> : <button className="editprofilebtn" onClick={() => setIsEditingProfile(true)}>Edit Profile</button> }
+              {isEditingProfile ? <button className="doneeditprofilebtn" onClick={() => setIsEditingProfile(false)}>Done Edits</button> : <button className="editprofilebtn" onClick={() => setIsEditingProfile(true)}>Edit Profile</button> }
             </div>
             
             
@@ -101,11 +101,11 @@ export default function MyAccount() {
               <p className="myprofilelineheader">Phone:</p>
               {currentUser.phoneNumber ? <p>{currentUser.phoneNumber}</p> : <p>N/A</p>}
             </div>
-            <div className="myprofileline">
+             { isEditingProfile && <div className="myprofileline">
               <Link href="/forgot-password">
                   <button>Reset Password</button>
               </Link>
-            </div>
+            </div> }
             {currentUser && <button className="signoutbtn" onClick={handleLogout}>Sign Out</button>}
           </div>
 

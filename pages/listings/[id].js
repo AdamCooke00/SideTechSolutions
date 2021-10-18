@@ -62,6 +62,7 @@ export default function Listing({ data, photos }) {
     const { id } = router.query
     const [imgUrl, setImgUrl] = useState('');
     const [viewImages, setViewImages] = useState(false);
+    const [showContact, setShowContact] = useState(false);
     const [additionaImages, setAdditionalImages] = useState([]);
 
 
@@ -112,10 +113,6 @@ export default function Listing({ data, photos }) {
                         <p className="rightaligntext">${parseInt(data.price / data.bedroomCount)}/month per person or ${data.price}/month total</p>
                     </div>
                     <div className="singleListingHouseInfo">
-                        <p className="leftaligntext">Landlord:</p>
-                        <p className="rightaligntext">{data.author_uid}</p>
-                    </div>
-                    <div className="singleListingHouseInfo">
                         <p className="leftaligntext">Move In Date:</p>
                         <p className="rightaligntext">May 1st 2022</p>
                     </div>
@@ -147,15 +144,24 @@ export default function Listing({ data, photos }) {
                     <div>
                         <div className="singleListingContactInfo">
                             <p className="leftaligntext">Email:</p>
-                            <p className="rightaligntext">sample@gmail.com</p>
+                            <p className="rightaligntext">{data.landlord}</p>
 
                         </div>
                         <div className="singleListingContactInfo">
                             <p className="leftaligntext">Phone:</p>
-                            <p className="rightaligntext">613-123-1233</p>
+                            <p className="rightaligntext">{data.phone || "N/A"}</p>
                         </div>
                     </div>
-                    <button className="requestatourbtn">Request A Tour</button>
+                    <button className="requestatourbtn" onClick={() => setShowContact(!showContact)}>{showContact ? "Close Request" : "Request A Tour / Request Information"}</button>
+                    {showContact && <div className="requesttourinfo">
+                        <h4>Email <span>{data.landlord}</span> using the following template.</h4>
+                        <ol>
+                            <li>Subject/Heading: Example:<br/><span>"{data.address} - Tour Request from SHH"</span></li>
+                            <li>General Info: Example:<br/><span>"Hello [Landlord], we are a group of five 2nd years attending Queen's University looking for a rental for May 2022."</span></li>
+                            <li>Request: Example:<br/><span>"We are interested in this rental and are looking to schedule an in-person tour. We are available Wednesday the 3rd before noon or after 5pm.</span></li>
+                            <li>End: Example:<br/><span>"Thank you and we look forward to your response. Best, [you].</span></li>
+                        </ol>
+                    </div>}
                 </div>
             </div>
             <Footer />

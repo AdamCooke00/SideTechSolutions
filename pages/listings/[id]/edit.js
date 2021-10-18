@@ -1,4 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
+import Link from "next/link"
 import Navbar from "../../../components/Navbar"
 import Footer from "../../../components/Footer"
 import {useAuth} from "../../../context/AuthContext"
@@ -6,6 +7,7 @@ import firebase, {auth, storage, db} from '../../../config/firebase-config';
 import {useRouter} from "next/router"
 import MultiImageInput from 'react-multiple-image-input';
 import { v4 as uuidv4 } from 'uuid';
+
 
 export default function EditListing() {
     const [address, setAddress] = useState('')
@@ -88,6 +90,7 @@ export default function EditListing() {
 
     const handleDeleteListing = async (event) => {
         event.preventDefault();
+        setLoading(true);
         additionalImages.forEach(async (img) => {
             await handleDeleteImage(img);
         })
@@ -195,6 +198,7 @@ export default function EditListing() {
                             <p>*Please note it can take up to 10 minutes for your new listing to appear on the rentals page*</p>
                         </div>
                         <button disabled={loading} className="editlistingbtn" type="submit">Confirm Edits</button>
+                        {loading && <div class="loader"></div>}
                     </form>
 
                 <button onClick={handleDeleteListing} className="deletelistingbtn" type="submit">Delete Listing</button>

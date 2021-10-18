@@ -6,6 +6,7 @@ import { storage } from '../config/firebase-config';
 function ListingItem({address, id, price, bedrooms, bathrooms, authorid}) {
     const {currentUser} = useAuth();
     const [imgUrl, setImgUrl] = useState('');
+    const [loading, setLoading] = useState(false)
 
     useEffect(async () => {
         let storageRef = storage.ref("rentalPhotos/"+ authorid +"/"+id+"/thumbnail");
@@ -33,17 +34,19 @@ function ListingItem({address, id, price, bedrooms, bathrooms, authorid}) {
                             <p><span className={styles.price}>${parseInt(price/bedrooms)}</span><span className={styles.permonth}>/month per person</span></p>
                             <p className={styles.totalprice}><span className={styles.price}>${price}</span><span className={styles.permonth}>/month total</span></p>
                         </div>
+                        {loading && <div class="loader"></div>}
                     </div>
                     
                     <div>
                         <Link href={`/listings/${id}`}>
-                            <button className={styles.moreinfobtn}>More Info</button>
+                            <button onClick={()=> setLoading(true)} className={styles.moreinfobtn}>More Info</button>
                         </Link>
                         {currentUser && currentUser.uid == authorid && 
                         <Link href={`/listings/${id}/edit`}>
-                            <button className={styles.editbtn}>Edit</button>
+                            <button onClick={()=> setLoading(true)} className={styles.editbtn}>Edit</button>
                         </Link>
                         }
+                        
                         {/* <p>Sponsored</p> */}
                     </div>
                 </div>

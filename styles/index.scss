@@ -1,3 +1,21 @@
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media only screen and (max-width: 1200px) {
   #final-section {
     padding: 4em 2em;
@@ -12,6 +30,7 @@
     flex-grow: 1;
     text-align: center;
     background-color: var(--primarypurple);
+
     .editlistingformdiv {
       background-color: var(--white);
       padding: 2em;
@@ -713,6 +732,26 @@
     border-radius: 2em;
     padding: 1em 2em;
     margin: 1em;
+  }
+  .requesttourinfo {
+    text-align: center;
+    padding: 1em 0;
+    h4 {
+      span {
+        display: block;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 18px;
+      }
+    }
+    li {
+      padding: 0.25em 0;
+      font-size: 18px;
+      span {
+        font-style: italic;
+        font-size: 16px;
+      }
+    }
   }
 }
 

@@ -2,7 +2,6 @@
 import '../styles/globals.css'
 import '../styles/design_tokens.css'
 import '../styles/index.scss'
-// import "bootstrap/dist/css/bootstrap.min.css"
 import { AuthProvider } from '../context/AuthContext'
 
 function MyApp({ Component, pageProps }) {
