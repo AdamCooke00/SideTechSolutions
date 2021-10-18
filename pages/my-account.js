@@ -90,7 +90,7 @@ export default function MyAccount() {
             
 
             <div className="myprofileline">
-              <p className="myprofilelineheader">Email:</p>
+              <p className="myprofilelineheader">Account Email:</p>
               {isEditingProfile ? <input type="email" onChange={(e) => setEditEmail(e.target.value)} value={editEmail} disabled required/> : <p style={{display: isEditingProfile}}>{currentUser.email}</p>}
             </div>
             <div className="myprofileline">

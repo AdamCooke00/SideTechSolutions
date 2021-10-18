@@ -191,19 +191,19 @@ export default function EditListing() {
                         </div>
                         <div  className="editlistingformline">
                             <label className="editlistingformlabel">No. of Bedrooms</label>
-                            <input type="number" onChange={(e) => setBedroomCount(e.target.value)} value={bedroomCount} required/>
+                            <input type="number" min="1" max="8" step="1" onChange={(e) => setBedroomCount(e.target.value)} value={bedroomCount} required/>
                         </div>
                         <div  className="editlistingformline">
                             <label className="editlistingformlabel">No. of Bathrooms</label>
-                            <input type="number" onChange={(e) => setBathroomCount(e.target.value)} value={bathroomCount} required/>
+                            <input type="number" min="1" max="5" step="0.5" onChange={(e) => setBathroomCount(e.target.value)} value={bathroomCount} required/>
                         </div>
                         <div  className="editlistingformline">
                             <label className="editlistingformlabel">Total Price</label>
-                            <input type="number" onChange={(e) => setTotalPrice(e.target.value)} value={totalPrice} required/>
+                            <input type="number" min="400" max="9000" step="5" onChange={(e) => setTotalPrice(e.target.value)} value={totalPrice} required/>
                         </div>
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">Parking Spaces</label>
-                            <input type="number" value={parkingSpacesState} onChange={(e) => setParkingSpacesState(e.target.value)} required />
+                            <input type="number" min="0" max="5" step="1" value={parkingSpacesState} onChange={(e) => setParkingSpacesState(e.target.value)} required />
                         </div>
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">Contact Email</label>

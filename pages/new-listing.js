@@ -120,7 +120,7 @@ export default function NewListing() {
 
     useEffect(async () => {
         currentUser && currentUser.emailVerified ? setPageLoading(false) : router.push("/login");
-        setContactEmail(currentUser.email);
+        currentUser && currentUser.email ? setContactEmail(currentUser.email) : router.push("/login");
     }, []);
 
     if (pageLoading) {
@@ -143,15 +143,15 @@ export default function NewListing() {
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">No. of Bedrooms</label>
-                            <input type="number" value={bedroomCountState} onChange={(e) => setBedroomCountState(e.target.value)} required />
+                            <input type="number" min="1" max="8" step="1" value={bedroomCountState} onChange={(e) => setBedroomCountState(e.target.value)} required />
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">No. of Bathrooms</label>
-                            <input type="number" value={bathroomCountState} onChange={(e) => setBathroomCountState(e.target.value)} required />
+                            <input type="number" min="1" max="5" step="0.5" value={bathroomCountState} onChange={(e) => setBathroomCountState(e.target.value)} required />
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Total Month Rent</label>
-                            <input type="number" value={totalMonthRentState} onChange={(e) => setTotalMonthRentState(e.target.value)} required />
+                            <input type="number" min="400" max="9000" step="5" value={totalMonthRentState} onChange={(e) => setTotalMonthRentState(e.target.value)} required />
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Month Rent / Person</label>
@@ -159,7 +159,7 @@ export default function NewListing() {
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Parking Spaces</label>
-                            <input type="number" value={parkingSpacesState} onChange={(e) => setParkingSpacesState(e.target.value)} required />
+                            <input type="number" min="0" max="5" step="1" value={parkingSpacesState} onChange={(e) => setParkingSpacesState(e.target.value)} required />
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Contact Email</label>
