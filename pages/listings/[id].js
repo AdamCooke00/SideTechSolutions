@@ -35,7 +35,7 @@ export async function getStaticProps({ params: { id } }) {
                         data: docSnapshot.data(),
                         photos,
                     },
-                    revalidate: 1800,
+                    revalidate: 600,
                 }
             } else {
                 return {
