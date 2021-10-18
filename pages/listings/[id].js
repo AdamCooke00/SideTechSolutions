@@ -109,8 +109,12 @@ export default function Listing({ data, photos }) {
                         <p className="rightaligntext">{data.bathroomCount}</p>
                     </div>
                     <div className="singleListingHouseInfo">
-                        <p className="leftaligntext">Price:</p>
-                        <p className="rightaligntext">${parseInt(data.price / data.bedroomCount)}/month per person or ${data.price}/month total</p>
+                        <p className="leftaligntext">Price Per Person:</p>
+                        <p className="rightaligntext">${parseInt(data.price / data.bedroomCount)}/month</p>
+                    </div>
+                    <div className="singleListingHouseInfo">
+                        <p className="leftaligntext">Total Price:</p>
+                        <p className="rightaligntext">${data.price}/month</p>
                     </div>
                     <div className="singleListingHouseInfo">
                         <p className="leftaligntext">Move In Date:</p>
@@ -152,7 +156,9 @@ export default function Listing({ data, photos }) {
                             <p className="rightaligntext">{data.phone || "N/A"}</p>
                         </div>
                     </div>
-                    <button className="requestatourbtn" onClick={() => setShowContact(!showContact)}>{showContact ? "Close Request" : "Request A Tour / Request Information"}</button>
+                    <div className="alignbtncenter">
+                        <button className="requestatourbtn" onClick={() => setShowContact(!showContact)}>{showContact ? "Close Request" : "Request A Tour / Request Information"}</button>
+                    </div>
                     {showContact && <div className="requesttourinfo">
                         <h4>Email <span>{data.landlord}</span> using the following template.</h4>
                         <ol>

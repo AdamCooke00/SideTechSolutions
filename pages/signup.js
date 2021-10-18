@@ -68,6 +68,11 @@ export default function SignUp() {
                         <label className="formlabel">Confirm Password</label>
                         <input className="forminput" type="password" ref={confirmpasswordRef} required/>
                     </div>
+
+                    <div className="landlordconfirm">
+                        <input className="checkbox" type="checkbox" required/>
+                        <label className="landordconfirmlabel">I confirm I am a Landlord</label>
+                    </div>
                     <button className="signinbtn" disabled={loading} type="submit">Sign Up</button>
                 </form>
                 <p>Already have an account?</p>

@@ -13,10 +13,15 @@ export default function EditListing() {
     const [address, setAddress] = useState('')
     const [bedroomCount, setBedroomCount] = useState('')
     const [bathroomCount, setBathroomCount] = useState('')
+    const [contactEmail, setContactEmail] = useState('')
     const [totalPrice, setTotalPrice] = useState('')
+    const [parkingSpacesState, setParkingSpacesState] = useState('')
+    const [utilitesState, setUtilitiesState] = useState('')
+    const [internetState, setInternetState] = useState('')
     const [imgUrl, setImgUrl] = useState('');
     const [additionalImages, setAdditionalImages] = useState([]);
     const [images, setImages] = useState({});
+    const [isContactDisabled, setIsContactDisabled] = useState(true)
     const router = useRouter()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false) //so user doesnt spam create listings.
@@ -30,6 +35,10 @@ export default function EditListing() {
             setAddress(listing.data().address)
             setBedroomCount(listing.data().bedroomCount)
             setBathroomCount(listing.data().bathroomCount)
+            setContactEmail(listing.data().landlord)
+            setParkingSpacesState(listing.data().parkingSpaces)
+            setInternetState(listing.data().internet)
+            setUtilitiesState(listing.data().utilities)
             setTotalPrice(listing.data().price)
             let listRef = storage.ref("rentalPhotos/"+ currentUser.uid + "/" + id);
             await listRef.listAll()
@@ -71,6 +80,10 @@ export default function EditListing() {
         await db.collection('listing').doc(id).update({
             bedroomCount: bedroomCount,
             bathroomCount: bathroomCount,
+            landlord: contactEmail,
+            parkingSpaces: parkingSpacesState,
+            utilities: utilitesState,
+            internet: internetState,
             price: totalPrice,
         }).then( async () => {
             console.log("Edited Listing");
@@ -164,6 +177,60 @@ export default function EditListing() {
                             <input type="number" onChange={(e) => setTotalPrice(e.target.value)} value={totalPrice} required/>
                         </div>
                         <div className="editlistingformline">
+                            <label className="editlistingformlabel">Parking Spaces</label>
+                            <input type="number" value={parkingSpacesState} onChange={(e) => setParkingSpacesState(e.target.value)} required />
+                        </div>
+                        <div className="editlistingformline">
+                            <label className="editlistingformlabel">Contact Email</label>
+                            <input disabled={isContactDisabled} type="email" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required />
+                            <p></p>
+                            {isContactDisabled && <button onClick={() => { setIsContactDisabled(false)}}>Change Contact Email</button>}
+                        </div>
+                        <div className="newlistingformlineradio">
+                            <label className="newlistingformlabel">Utilities</label>
+                            <input
+                                name="utilitiesState"
+                                type="radio"
+                                value="included"
+                                id="yes"
+                                checked={utilitesState === "included"}
+                                onChange={() => setUtilitiesState("included")}
+                                required
+                            />
+                            <label className="radiolabel" htmlFor="yes">Included</label>
+                            <input
+                                name="utilitiesState"
+                                type="radio"
+                                value="not included"
+                                id="no"
+                                checked={utilitesState === "not included"}
+                                onChange={() => setUtilitiesState("not included")}
+                            />
+                            <label className="radiolabel" htmlFor="no">Not Included</label>
+                        </div>
+                        <div className="newlistingformlineradio">
+                            <label className="newlistingformlabel">Internet</label>
+                            <input
+                                name="internetState"
+                                type="radio"
+                                value="included"
+                                id="yesInternet"
+                                checked={internetState === "included"}
+                                onChange={() => setInternetState("included")}
+                                required
+                            />
+                            <label className="radiolabel" htmlFor="yesInternet">Included</label>
+                            <input
+                                name="internetState"
+                                type="radio"
+                                value="not included"
+                                id="noInternet"
+                                checked={internetState === "not included"}
+                                onChange={() => setInternetState("not included")}
+                            />
+                            <label className="radiolabel" htmlFor="noInternet">Not Included</label>
+                        </div>
+                        <div className="editlistingformline">
                             <p className="editthumbnailtitle">Current Thumbnail Picture</p>
                             <img src={imgUrl}/>
                         </div>
@@ -195,7 +262,7 @@ export default function EditListing() {
                             />
                         </div>
                         <div className="editlistingformline notice">
-                            <p>*Please note it can take up to 10 minutes for your new listing to appear on the rentals page*</p>
+                            <p>*Please note it can take up to 10 minutes for your edits to appear on the rentals page*</p>
                         </div>
                         <button disabled={loading} className="editlistingbtn" type="submit">Confirm Edits</button>
                         {loading && <div class="loader"></div>}

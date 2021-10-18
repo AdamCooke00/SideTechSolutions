@@ -18,9 +18,11 @@ export default function NewListing() {
     const [parkingSpacesState, setParkingSpacesState] = useState('')
     const [utilitesState, setUtilitiesState] = useState('')
     const [internetState, setInternetState] = useState('')
+    const [contactEmail, setContactEmail] = useState('')
     const router = useRouter()
     const [potentialAddresses, setPotentialAddresses] = useState([])
     const [isAddressDisabled, setIsAddressDisabled] = useState(false)
+    const [isContactDisabled, setIsContactDisabled] = useState(true)
     const [fullAddress, setFullAddress] = useState('')
     const [images, setImages] = useState({});
     const [error, setError] = useState('')
@@ -75,7 +77,7 @@ export default function NewListing() {
                     parkingSpaces: parkingSpacesState,
                     utilities: utilitesState,
                     internet: internetState,
-                    landlord: currentUser.email,
+                    landlord: contactEmail,
                     author_uid: currentUser.uid
                 }).then(async (result) => {
                     await handleNewPhotos(event.target.thumbnail.files[0], result.id);
@@ -116,6 +118,7 @@ export default function NewListing() {
 
     useEffect(async () => {
         currentUser && currentUser.emailVerified ? setPageLoading(false) : router.push("/login");
+        setContactEmail(currentUser.email);
     }, []);
 
     if (pageLoading) {
@@ -150,11 +153,17 @@ export default function NewListing() {
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Month Rent / Person</label>
-                            <input disabled type="number" value={totalMonthRentState / bedroomCountState} />
+                            <input disabled type="number" value={totalMonthRentState / bedroomCountState || 0} />
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Parking Spaces</label>
                             <input type="number" value={parkingSpacesState} onChange={(e) => setParkingSpacesState(e.target.value)} required />
+                        </div>
+                        <div className="newlistingformline">
+                            <label className="newlistingformlabel">Contact Email</label>
+                            <input disabled={isContactDisabled} type="email" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} required />
+                            <p></p>
+                            {isContactDisabled && <button onClick={() => { setIsContactDisabled(false)}}>Change Contact Email</button>}
                         </div>
                         <div className="newlistingformlineradio">
                             <label className="newlistingformlabel">Utilities</label>
@@ -167,7 +176,7 @@ export default function NewListing() {
                                 onChange={() => setUtilitiesState("included")}
                                 required
                             />
-                            <label className="radiolabel" for="yes">Included</label>
+                            <label className="radiolabel" htmlFor="yes">Included</label>
                             <input
                                 name="utilitiesState"
                                 type="radio"
@@ -176,7 +185,7 @@ export default function NewListing() {
                                 checked={utilitesState === "not included"}
                                 onChange={() => setUtilitiesState("not included")}
                             />
-                            <label className="radiolabel" for="no">Not Included</label>
+                            <label className="radiolabel" htmlFor="no">Not Included</label>
                         </div>
                         <div className="newlistingformlineradio">
                             <label className="newlistingformlabel">Internet</label>
@@ -189,7 +198,7 @@ export default function NewListing() {
                                 onChange={() => setInternetState("included")}
                                 required
                             />
-                            <label className="radiolabel" for="yesInternet">Included</label>
+                            <label className="radiolabel" htmlFor="yesInternet">Included</label>
                             <input
                                 name="internetState"
                                 type="radio"
@@ -198,7 +207,7 @@ export default function NewListing() {
                                 checked={internetState === "not included"}
                                 onChange={() => setInternetState("not included")}
                             />
-                            <label className="radiolabel" for="noInternet">Not Included</label>
+                            <label className="radiolabel" htmlFor="noInternet">Not Included</label>
                         </div>
                         <div className="newlistingformline">
                             <p className="addthumbnailtitle">Add Thumbnail Photo</p>

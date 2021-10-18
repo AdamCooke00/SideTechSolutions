@@ -71,7 +71,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 1}
                 onChange={() => setFilters({ bedrooms: 1 })}
               />
-              <label for="filterCheckBoxNo1">1</label>
+              <label htmlFor="filterCheckBoxNo1">1</label>
               <input
                 type="radio"
                 id="filterCheckBoxNo2"
@@ -80,7 +80,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 2}
                 onChange={() => setFilters({ bedrooms: 2 })}
               />
-              <label for="filterCheckBoxNo2">2</label>
+              <label htmlFor="filterCheckBoxNo2">2</label>
               <input
                 type="radio"
                 id="filterCheckBoxNo3"
@@ -89,7 +89,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 3}
                 onChange={() => setFilters({ bedrooms: 3 })}
               />
-              <label for="filterCheckBoxNo3">3</label>
+              <label htmlFor="filterCheckBoxNo3">3</label>
               <input
                 type="radio"
                 id="filterCheckBoxNo4"
@@ -98,7 +98,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 4}
                 onChange={() => setFilters({ bedrooms: 4 })}
               />
-              <label for="filterCheckBoxNo4">4</label>
+              <label htmlFor="filterCheckBoxNo4">4</label>
               <input
                 type="radio"
                 id="filterCheckBoxNo5"
@@ -107,7 +107,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 5}
                 onChange={() => setFilters({ bedrooms: 5 })}
               />
-              <label for="filterCheckBoxNo5">5</label>
+              <label htmlFor="filterCheckBoxNo5">5</label>
               <input
                 type="radio"
                 id="filterCheckBoxNo6"
@@ -116,7 +116,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 6}
                 onChange={() => setFilters({ bedrooms: 6 })}
               />
-              <label for="filterCheckBoxNo6">6</label>
+              <label htmlFor="filterCheckBoxNo6">6</label>
               <br />
               <input
                 type="radio"
@@ -126,7 +126,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 7}
                 onChange={() => setFilters({ bedrooms: 7 })}
               />
-              <label for="filterCheckBoxNo7">7</label>
+              <label htmlFor="filterCheckBoxNo7">7</label>
               <input
                 type="radio"
                 id="filterCheckBoxNo8"
@@ -135,7 +135,7 @@ export default function Home({ queriedListings }) {
                 checked={filters.bedrooms === 8}
                 onChange={() => setFilters({ bedrooms: 8 })}
               />
-              <label for="filterCheckBoxNo8">8</label>
+              <label htmlFor="filterCheckBoxNo8">8</label>
             </div>
           </div>
           <div className="filterbtndiv">
@@ -172,7 +172,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 1}
                   onChange={() => setFilters({ bedrooms: 1 })}
                 />
-                <label for="filterCheckBoxDesktopNo1">1</label>
+                <label htmlFor="filterCheckBoxDesktopNo1">1</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo2"
@@ -181,7 +181,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 2}
                   onChange={() => setFilters({ bedrooms: 2 })}
                 />
-                <label for="filterCheckBoxDesktopNo2">2</label>
+                <label htmlFor="filterCheckBoxDesktopNo2">2</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo3"
@@ -190,7 +190,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 3}
                   onChange={() => setFilters({ bedrooms: 3 })}
                 />
-                <label for="filterCheckBoxDesktopNo3">3</label>
+                <label htmlFor="filterCheckBoxDesktopNo3">3</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo4"
@@ -199,7 +199,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 4}
                   onChange={() => setFilters({ bedrooms: 4 })}
                 />
-                <label for="filterCheckBoxDesktopNo4">4</label>
+                <label htmlFor="filterCheckBoxDesktopNo4">4</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo5"
@@ -208,7 +208,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 5}
                   onChange={() => setFilters({ bedrooms: 5 })}
                 />
-                <label for="filterCheckBoxDesktopNo5">5</label>
+                <label htmlFor="filterCheckBoxDesktopNo5">5</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo6"
@@ -217,7 +217,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 6}
                   onChange={() => setFilters({ bedrooms: 6 })}
                 />
-                <label for="filterCheckBoxDesktopNo6">6</label>
+                <label htmlFor="filterCheckBoxDesktopNo6">6</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo7"
@@ -226,7 +226,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 7}
                   onChange={() => setFilters({ bedrooms: 7 })}
                 />
-                <label for="filterCheckBoxDesktopNo7">7</label>
+                <label htmlFor="filterCheckBoxDesktopNo7">7</label>
                 <input
                   type="radio"
                   id="filterCheckBoxDesktopNo8"
@@ -235,7 +235,7 @@ export default function Home({ queriedListings }) {
                   checked={filters.bedrooms === 8}
                   onChange={() => setFilters({ bedrooms: 8 })}
                 />
-                <label for="filterCheckBoxDesktopNo8">8</label>
+                <label htmlFor="filterCheckBoxDesktopNo8">8</label>
               </div>
               <div className="filterbtndiv">
                 <button className="filterbtn" onClick={handleFilters}>Apply Filters</button>
