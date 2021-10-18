@@ -117,7 +117,7 @@ export default function MyAccount() {
             {!currentUser.emailVerified && sentVerification && <h3>Verification email has been sent ...</h3>}
             {!currentUser.emailVerified && !sentVerification && <h3 onClick={sendEmailVerification}>You must <span className="verifyemailspan">VERIFY YOUR EMAIL</span> before you can add listings</h3>}
             {currentUser.emailVerified && myHouses.length == 0 ? <p>Currently, You Have No Listings</p> : myHouses.map(listing => <div className="oneproperty" key={listing.id}>
-              <ListingItem key={listing.id} id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} authorid={listing.author_uid}/>
+              <ListingItem key={listing.id} id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} available={listing.available} authorid={listing.author_uid}/>
               </div>
             )}
 

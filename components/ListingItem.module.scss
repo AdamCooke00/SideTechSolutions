@@ -41,6 +41,19 @@
     padding: 1em 2em;
     margin-bottom: 1em;
   }
+  .availablebtn {
+    background-color: green;
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 2em;
+    padding: 1em 2em;
+    margin-bottom: 1em;
+  }
   .address {
     font-weight: 600;
   }

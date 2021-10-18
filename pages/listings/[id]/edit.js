@@ -16,6 +16,7 @@ export default function EditListing() {
     const [contactEmail, setContactEmail] = useState('')
     const [totalPrice, setTotalPrice] = useState('')
     const [parkingSpacesState, setParkingSpacesState] = useState('')
+    const [availabilityState, setAvailabilityState] = useState('')
     const [utilitesState, setUtilitiesState] = useState('')
     const [internetState, setInternetState] = useState('')
     const [imgUrl, setImgUrl] = useState('');
@@ -39,6 +40,7 @@ export default function EditListing() {
             setParkingSpacesState(listing.data().parkingSpaces)
             setInternetState(listing.data().internet)
             setUtilitiesState(listing.data().utilities)
+            setAvailabilityState(listing.data().available)
             setTotalPrice(listing.data().price)
             let listRef = storage.ref("rentalPhotos/"+ currentUser.uid + "/" + id);
             await listRef.listAll()
@@ -71,7 +73,25 @@ export default function EditListing() {
       }, []);
 
 
-    
+      const handleChangeAvailibility = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        let { id } = router.query
+        // console.log(event.target.thumbnailPhoto.files.length);
+        await db.collection('listing').doc(id).update({
+            available: !availabilityState
+        }).then( async () => {
+            console.log("Changed Availibility");
+            router.push('/my-account')
+        }).catch((e)=> {
+            console.log("Unable to change availibility");
+            console.error(e);
+        })
+        setLoading(false);
+        setTimeout(() => {
+        }, 4000)
+    }
+
     const handleEditListing = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -158,7 +178,12 @@ export default function EditListing() {
             <div className="editlistingformdiv">
                 <h2 className="editlistingformtitle">Edit Your Listing</h2>
                     {error && <p variant="danger">{error}</p>}
+                    <p>Current Availability: {availabilityState ? "Is Available" : "Is Not Available"}</p>
+                    {availabilityState ? <button className="notAvailablebtn" disabled={loading} onClick={handleChangeAvailibility} type="submit">Rental Is No Longer Available</button> : <button disabled={loading} className="nowAvailablebtn" onClick={handleChangeAvailibility} type="submit">Rental is Now Available</button>}
                     <form onSubmit={handleEditListing}>
+                        <div className="editlistingformline notice">
+                            <p>*Please note it can take up to 10 minutes for your edits to appear on the rentals page*</p>
+                        </div>
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">House Address</label>
                             <input type="text" value={address} disabled required/>
@@ -250,11 +275,11 @@ export default function EditListing() {
                         </div>
                         <div className="editlistingformline">
                             <p className="editthumbnailtitle">Add Additional Photos</p>
-                            <p>6 Additional Max ({6-additionalImages.length} remaining)</p>
+                            <p>12 Additional Max ({12-additionalImages.length} remaining)</p>
 
                             <MultiImageInput
                             images={images}
-                            max={6-additionalImages.length}
+                            max={12-additionalImages.length}
                             setImages={setImages}
                             allowCrop={false}
                             theme={"light"}

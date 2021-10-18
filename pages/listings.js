@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 export async function getStaticProps() {
   console.log("Static Props")
   let listingData = []
-  await db.collection('listing').get()
+  await db.collection('listing').where("available", "==", true).get()
     .then(querySnapshot => {
       querySnapshot.docs.forEach(doc => {
         listingData.push({
@@ -154,7 +154,7 @@ export default function Home({ queriedListings }) {
           <p className="numberofrentals">{filteredListings.length} Rentals</p>
           {filteredListings.map(listing =>
             <div key={listing.id} className="asinglelisting">
-              <ListingItem id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} authorid={listing.author_uid} />
+              <ListingItem id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} available={listing.available} authorid={listing.author_uid} />
             </div>
           )}
         </div>

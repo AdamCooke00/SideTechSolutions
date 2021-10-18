@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './ListingItem.module.scss';
 import {useAuth} from "../context/AuthContext"
 import { storage } from '../config/firebase-config';
-function ListingItem({address, id, price, bedrooms, bathrooms, authorid}) {
+function ListingItem({address, id, price, bedrooms, bathrooms, available, authorid}) {
     const {currentUser} = useAuth();
     const [imgUrl, setImgUrl] = useState('');
     const [loading, setLoading] = useState(false)
@@ -44,6 +44,17 @@ function ListingItem({address, id, price, bedrooms, bathrooms, authorid}) {
                         {currentUser && currentUser.uid == authorid && 
                         <Link href={`/listings/${id}/edit`}>
                             <button onClick={()=> setLoading(true)} className={styles.editbtn}>Edit</button>
+                        </Link>
+                        }
+                        <br/>
+                        {currentUser && currentUser.uid == authorid && available &&
+                        <Link href={`/listings/${id}/edit`}>
+                            <button onClick={()=> setLoading(true)} className={styles.availablebtn}>Status: Available</button>
+                        </Link>
+                        }
+                        {currentUser && currentUser.uid == authorid && !available &&
+                        <Link href={`/listings/${id}/edit`}>
+                            <button onClick={()=> setLoading(true)} className={styles.editbtn}>Status: Not Available</button>
                         </Link>
                         }
                         

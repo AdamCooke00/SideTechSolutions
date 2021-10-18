@@ -36,6 +36,32 @@
       padding: 2em;
       word-wrap: break-word;
       margin: 2em;
+      .nowAvailablebtn {
+        background-color: green;
+        border: 3px green solid;
+        color: var(--black);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 0 0 2em 0;
+      }
+      .notAvailablebtn {
+        background-color: orangered;
+        border: 3px orangered solid;
+        color: var(--black);
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        border-radius: 2em;
+        padding: 1em 2em;
+        margin: 0 0 2em 0;
+      }
       .editlistingformtitle {
         margin: 0 0 1em 0;
       }
@@ -188,6 +214,9 @@
         color: var(--white);
         padding: 0.5em 1em;
         font-weight: 600;
+      }
+      .landlordconfirm {
+        margin: 1em 0;
       }
       .createlistingbtn {
         background-color: var(--primarypurple);

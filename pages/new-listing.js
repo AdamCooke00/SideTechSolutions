@@ -23,6 +23,7 @@ export default function NewListing() {
     const [potentialAddresses, setPotentialAddresses] = useState([])
     const [isAddressDisabled, setIsAddressDisabled] = useState(false)
     const [isContactDisabled, setIsContactDisabled] = useState(true)
+    const [toBeListed, setToBeListed] = useState(true)
     const [fullAddress, setFullAddress] = useState('')
     const [images, setImages] = useState({});
     const [error, setError] = useState('')
@@ -33,7 +34,7 @@ export default function NewListing() {
     const handleGeocoder = async (event) => {
         event.preventDefault();
         setAddressText(event.target.value)
-        if (addressText.length > 3) {
+        if (addressText.length > 2) {
             await geocodingClient.forwardGeocode({
                 query: event.target.value,
                 limit: 4,
@@ -78,6 +79,7 @@ export default function NewListing() {
                     utilities: utilitesState,
                     internet: internetState,
                     landlord: contactEmail,
+                    available: toBeListed,
                     author_uid: currentUser.uid
                 }).then(async (result) => {
                     await handleNewPhotos(event.target.thumbnail.files[0], result.id);
@@ -215,11 +217,11 @@ export default function NewListing() {
                         </div>
                         <div className="newlistingformline">
                             <p className="addthumbnailtitle">Add Additional Photos</p>
-                            <p>6 Additional Max</p>
+                            <p>12 Additional Max</p>
 
                             <MultiImageInput
                                 images={images}
-                                max={6}
+                                max={12}
                                 setImages={setImages}
                                 allowCrop={false}
                                 theme={"light"}
@@ -229,7 +231,11 @@ export default function NewListing() {
                         <div className="newlistingformline notice">
                             <p>*Please note it can take up to 10 minutes for your new listing to appear on the rentals page*</p>
                         </div>
-                        <button className="createlistingbtn" disabled={loading} type="submit">Create New Listing</button>
+                        <div className="landlordconfirm">
+                            <input className="checkbox" type="checkbox" checked={toBeListed} onClick={() => setToBeListed(!toBeListed)}/>
+                            <label className="landordconfirmlabel">List upon creation</label>
+                        </div>
+                        <button className="createlistingbtn" disabled={loading} type="submit">Create {toBeListed && "and List"}</button>
                         {loading && <div class="loader"></div>}
                     </form>
                 </div>
