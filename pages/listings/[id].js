@@ -124,10 +124,10 @@ export default function Listing({ data, photos }) {
                         <p className="leftaligntext">Parking Spaces:</p>
                         <p className="rightaligntext">{data.parkingSpaces}</p>
                     </div>
-                    {/* <div className="singleListingHouseInfo">
-                        <p className="leftaligntext">AC Unit:</p>
-                        <p className="rightaligntext">None</p>
-                    </div> */}
+                    <div className="singleListingHouseInfo">
+                        <p className="leftaligntext">Realtor:</p>
+                        <p className="rightaligntext">{data.landlordDisplayName}</p>
+                    </div>
                 </div>
                 <div>
                     <h4 className="infoheadertitle">Utilities Info</h4>

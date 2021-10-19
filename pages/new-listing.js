@@ -79,6 +79,7 @@ export default function NewListing() {
                     utilities: utilitesState,
                     internet: internetState,
                     landlord: contactEmail,
+                    landlordDisplayName: currentUser.displayName,
                     available: toBeListed,
                     author_uid: currentUser.uid
                 }).then(async (result) => {

@@ -11,6 +11,7 @@ export default function SignUp() {
     const confirmpasswordRef = useRef()
     const {currentUser, signup} = useAuth()
     const [error, setError] = useState('')
+    const [formDisplayName, setFormDisplayName] = useState('Property Company / Realtor Name')
     const [pageLoading, setPageLoading] = useState(true)
     const [loading, setLoading] = useState(false) //so user doesnt spam signup and make multiple accounts. shouldnt be needed cuz of email restriction anyway but nonetheless
     const router = useRouter()
@@ -22,9 +23,12 @@ export default function SignUp() {
         }
         setError('')
         setLoading(true)
-        signup(emailRef.current.value, passwordRef.current.value).then((res) => {
+        signup(emailRef.current.value, passwordRef.current.value).then(async (res) => {
             // Signed in 
-            res.user.sendEmailVerification({
+            await res.user.updateProfile({
+                displayName: formDisplayName,
+            })
+            await res.user.sendEmailVerification({
             url: "https://studenthousinghub.ca/my-account",
             })
             router.push('/my-account')
@@ -55,6 +59,11 @@ export default function SignUp() {
                     <div className="formline">
                         <label className="formlabel">Email</label>
                         <input className="forminput" type="email" ref={emailRef} required/>
+                    </div>
+
+                    <div className="formline">
+                        <label className="formlabel">Display Name</label>
+                        <input className="forminput" type="text" onChange={(e) => setFormDisplayName(e.target.value)} value={formDisplayName} required/>
                     </div>
                     
                     <div className="formline">

@@ -15,6 +15,7 @@ export default function MyAccount() {
   const [sentVerification, setSentVerification] = useState(false);
   const [verificationError, setVerificationError] = useState(false);
   const [editEmail, setEditEmail] = useState('');
+  const [editDisplayName, setEditDisplayName] = useState('');
   const [isEditingProfile, setIsEditingProfile] = useState(false);
 
   const router = useRouter();
@@ -28,6 +29,7 @@ export default function MyAccount() {
       console.log(error);
     });
   }
+
   function sendEmailVerification(e){
     e.preventDefault()
     currentUser.sendEmailVerification({
@@ -41,6 +43,14 @@ export default function MyAccount() {
     });
   }
 
+  async function handleEditProfile(){
+    await currentUser.updateProfile({
+      displayName: editDisplayName
+    })
+    setIsEditingProfile(false)
+  }
+    
+
   useEffect(async() => {
     if(!currentUser){
       console.log("IN NO CURRENTUSER")
@@ -49,6 +59,7 @@ export default function MyAccount() {
     }
     let newArray = [];
     setEditEmail(currentUser.email)
+    setEditDisplayName(currentUser.displayName)
     await fire.firestore()
       .collection('listing').where("author_uid", "==", currentUser.uid).get()
       .then((querySnapshot) => {
@@ -83,17 +94,20 @@ export default function MyAccount() {
           <div className="myprofilediv">
             <div className="myaccounttitlediv">
               <div>
-                <h1 className="myaccounttitle">{currentUser.email}</h1>
+                <h1 className="myaccounttitle">{currentUser.displayName || currentUser.email}</h1>
                 <h4 className="myaccountsubtitle">Landlord</h4>
               </div>   
-              {isEditingProfile ? <button className="doneeditprofilebtn" onClick={() => setIsEditingProfile(false)}>Done Edits</button> : <button className="editprofilebtn" onClick={() => setIsEditingProfile(true)}>Edit Profile</button> }
+              {isEditingProfile ? <button className="doneeditprofilebtn" onClick={() => handleEditProfile()}>Done Edits</button> : <button className="editprofilebtn" onClick={() => setIsEditingProfile(true)}>Edit Profile</button> }
             </div>
-            
             
 
             <div className="myprofileline">
               <p className="myprofilelineheader">Account Email:</p>
               {isEditingProfile ? <input type="email" onChange={(e) => setEditEmail(e.target.value)} value={editEmail} disabled required/> : <p style={{display: isEditingProfile}}>{currentUser.email}</p>}
+            </div>
+            <div className="myprofileline">
+              <p className="myprofilelineheader">Display Name:</p>
+              {isEditingProfile ? <input type="text" onChange={(e) => setEditDisplayName(e.target.value)} value={editDisplayName} required/> : <p style={{display: isEditingProfile}}>{editDisplayName}</p>}
             </div>
             <div className="myprofileline">
               <p className="myprofilelineheader">Email Verified:</p>
@@ -108,7 +122,7 @@ export default function MyAccount() {
                   <button>Reset Password</button>
               </Link>
             </div> }
-            {currentUser && <button className="signoutbtn" onClick={handleLogout}>Sign Out</button>}
+            {currentUser && !isEditingProfile && <button className="signoutbtn" onClick={handleLogout}>Sign Out</button>}
           </div>
 
           <div className="mypropertiesdiv">
@@ -120,7 +134,7 @@ export default function MyAccount() {
             {!currentUser.emailVerified && verificationError && <h3>Email has already been sent. Error sending another verification email. Look in your inbox or try again later ...</h3>}
             {!currentUser.emailVerified && !sentVerification && <h3 onClick={sendEmailVerification}>You must <span className="verifyemailspan">VERIFY YOUR EMAIL</span> before you can add listings</h3>}
             {currentUser.emailVerified && myHouses.length == 0 ? <p>Currently, You Have No Listings</p> : myHouses.map(listing => <div className="oneproperty" key={listing.id}>
-              <ListingItem key={listing.id} id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} available={listing.available} authorid={listing.author_uid}/>
+              <ListingItem key={listing.id} id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} available={listing.available} landlordDisplayName={listing.landlordDisplayName} authorid={listing.author_uid}/>
               </div>
             )}
 
