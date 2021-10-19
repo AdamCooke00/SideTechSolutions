@@ -198,8 +198,12 @@ export default function EditListing() {
                             <input type="number" min="1" max="5" step="0.5" onChange={(e) => setBathroomCount(e.target.value)} value={bathroomCount} required/>
                         </div>
                         <div  className="editlistingformline">
-                            <label className="editlistingformlabel">Total Price</label>
+                            <label className="editlistingformlabel">Total Month Price</label>
                             <input type="number" min="400" max="9000" step="5" onChange={(e) => setTotalPrice(e.target.value)} value={totalPrice} required/>
+                        </div>
+                        <div className="editlistingformline">
+                            <label className="editlistingformlabel">Month Rent / Person</label>
+                            <input disabled type="number" value={totalPrice / bedroomCount || 0} />
                         </div>
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">Parking Spaces</label>

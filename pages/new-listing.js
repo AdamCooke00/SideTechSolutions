@@ -141,6 +141,7 @@ export default function NewListing() {
                             <input type="text" value={addressText} onChange={handleGeocoder} disabled={isAddressDisabled} required />
                             {potentialAddresses.map(address => <p className="paragraphlikelink" onClick={() => handleSelectedAddress(address)} key={address.id}>{address.place_name}</p>)}
                             {isAddressDisabled && <button onClick={() => { setIsAddressDisabled(false); setLoading(false); }}>Change Address</button>}
+                            <p>Unit # Coming Soon</p>
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">No. of Bedrooms</label>
@@ -157,6 +158,10 @@ export default function NewListing() {
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Month Rent / Person</label>
                             <input disabled type="number" value={totalMonthRentState / bedroomCountState || 0} />
+                        </div>
+                        <div className="newlistingformline">
+                            <label className="newlistingformlabel">Move In Date</label>
+                            <input disabled type="text" value="May 2022 Default ----- Edit Move In Date Coming Soon" />
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Parking Spaces</label>
