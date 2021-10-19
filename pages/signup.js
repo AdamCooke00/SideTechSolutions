@@ -30,9 +30,7 @@ export default function SignUp() {
             router.push('/my-account')
             // ...
           }).catch((error) => {
-            var errorCode = error.code;
             setError(error.message);
-            // ..
           });
         setLoading(false)
     }

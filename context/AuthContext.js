@@ -28,18 +28,13 @@ export function AuthProvider({children}) {
     }
 
     useEffect(() => {
-        console.log("in useEffect within auth provider")
         const unsubscribe = auth.onAuthStateChanged(user => {
-            console.log("in AuthStateChanged")
-            console.log(user)
             setCurrentUser(user)
             setLoading(false)
-            console.log("No longer loading")
         });
         return unsubscribe
     }, [])
     
-
     const value = {
         currentUser,
         signup,

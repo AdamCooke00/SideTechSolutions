@@ -24,7 +24,7 @@ export default function Safety() {
             <li><strong>READ THE LEASE AGGREMENT.</strong> It may be long and tedious, but you only need to do it once. It is common to find mistakes in the lease that need
             to be fixed before you sign. Also, you will now know what you can and cannot due per the aggrement.</li>
           </ul>
-          <p>*Student Housing Hub is not responsible for any conflict that may arise between landlord and tenant.*</p>
+          <p>*Student Housing Hub is not liable or responsible for any conflict arising between Landlord and Tenant.*</p>
           <p>This page will be updated through time as seen fit to equip students with more tools to assist them in safely finding a rental.</p>
           <p>Consult the <Link href="/contact"><strong>CONTACT PAGE</strong></Link> for an questions or inquires.</p>
         </div>

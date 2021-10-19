@@ -17,8 +17,10 @@ export default function ForgotPassword() {
         await resetPassword(emailRef.current.value).then(() => {
             setError(`An email has been sent to ${emailRef.current.value}`)
           }).catch(error => {
-            var errorCode = error.code;
             setError(error.message);
+            if(error.code == "auth/user-not-found"){
+                setError("There is no user corresponding to the identifier. Please Try Again. If you believe this is a mistake, please email: landlord@studenthousinghub.ca")
+              }
             setLoading(false);
           });
     }

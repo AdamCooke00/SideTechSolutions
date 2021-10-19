@@ -24,9 +24,19 @@ export default function Login() {
             router.push('/my-account')
             // ...
           }).catch((error) => {
-            var errorCode = error.code;
-            setError(error.message);
-            // ..
+            console.log(error)
+            if(error.code == "auth/user-not-found"){
+              setError("Unable to Login. There is no user corresponding to the identifier. Please Try Again. If you believe this is a mistake, please email: landlord@studenthousinghub.ca")
+            }
+            else if(error.code == "auth/wrong-password"){
+              setError("Password Invalid. Please Try Again. If you believe this is a mistake, please email: landlord@studenthousinghub.ca")
+            }
+            else if(error.code == "auth/too-many-requests"){
+              setError("Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.")
+            }
+            else {
+              setError("Unable to process request. Please try again later.")
+            }
           });
         setLoading(false)
     }
