@@ -25,7 +25,7 @@ export default function SignUp() {
         signup(emailRef.current.value, passwordRef.current.value).then((res) => {
             // Signed in 
             res.user.sendEmailVerification({
-            url: "https://student-housing-hub.vercel.app/my-account",
+            url: "https://studenthousinghub.ca/my-account",
             })
             router.push('/my-account')
             // ...

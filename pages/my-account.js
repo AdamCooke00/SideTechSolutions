@@ -31,7 +31,7 @@ export default function MyAccount() {
   function sendEmailVerification(e){
     e.preventDefault()
     currentUser.sendEmailVerification({
-      url: "https://student-housing-hub.vercel.app/my-account",
+      url: "https://studenthousinghub.ca/my-account",
     }).then(() => {
       console.log("Email Sent Successful");
       setSentVerification(true)
