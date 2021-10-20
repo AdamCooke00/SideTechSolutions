@@ -9,9 +9,9 @@ export default function SignUp() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const confirmpasswordRef = useRef()
-    const {currentUser, signup} = useAuth()
+    const {currentUser, signup, googleLogin} = useAuth()
     const [error, setError] = useState('')
-    const [formDisplayName, setFormDisplayName] = useState('Property Company / Realtor Name')
+    const [formDisplayName, setFormDisplayName] = useState('')
     const [pageLoading, setPageLoading] = useState(true)
     const [loading, setLoading] = useState(false) //so user doesnt spam signup and make multiple accounts. shouldnt be needed cuz of email restriction anyway but nonetheless
     const router = useRouter()
@@ -39,6 +39,29 @@ export default function SignUp() {
         setLoading(false)
     }
 
+    function handleGoogleLogin(){
+        googleLogin()
+        .then((result) => {
+          /** @type {firebase.auth.OAuthCredential} */
+          var credential = result.credential;
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          router.push('/my-account')
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
+      }
+
     useEffect(async () => {
         currentUser ? router.push("/my-account") : setPageLoading(false);
       }, []);
@@ -54,6 +77,9 @@ export default function SignUp() {
             <div className="loginbox">
                 <p>Please <strong>only create an account if you are a Landlord</strong>. We will be adding student accounts in the future.</p>
                 <h2 className="formtitle">Create Account</h2>
+                <div className="justifyContentCenter">
+                  <img onClick={handleGoogleLogin} alt="Sign In With Google" src="/googlebtn.png"/>
+                </div>
                 {error && <p>{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="formline">
@@ -63,7 +89,7 @@ export default function SignUp() {
 
                     <div className="formline">
                         <label className="formlabel">Display Name</label>
-                        <input className="forminput" type="text" onChange={(e) => setFormDisplayName(e.target.value)} value={formDisplayName} required/>
+                        <input className="forminput" type="text" onChange={(e) => setFormDisplayName(e.target.value)} value={formDisplayName} placeholder="Company / Realtor" required/>
                     </div>
                     
                     <div className="formline">

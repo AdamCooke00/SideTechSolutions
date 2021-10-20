@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {auth} from "../config/firebase-config"
+import {auth, googleProvider} from "../config/firebase-config"
 
 const AuthContext = React.createContext();
 
@@ -17,6 +17,10 @@ export function AuthProvider({children}) {
 
     function login(email, password){
         return auth.signInWithEmailAndPassword(email, password)
+    }
+
+    function googleLogin(){
+        return auth.signInWithRedirect(googleProvider)
     }
 
     function logout() {
@@ -39,6 +43,7 @@ export function AuthProvider({children}) {
         currentUser,
         signup,
         login,
+        googleLogin,
         logout,
         resetPassword
     }

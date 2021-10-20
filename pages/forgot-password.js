@@ -32,6 +32,7 @@ export default function ForgotPassword() {
         <div className="loginportion">
             <div className="loginbox">
                 <h2 className='formtitle'>Password Reset</h2>
+                <p>This will only reset a password for login using email. If you login through Google Authentication, this will let you set a password to login using email to the same account.</p>
                 {error && <p>{error}</p>}
                 <form onSubmit={handleReset}>
                     <div className="formline">

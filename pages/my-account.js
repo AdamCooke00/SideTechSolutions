@@ -72,9 +72,6 @@ export default function MyAccount() {
     .catch((error) => {
         console.log("Error getting documents: ", error);
     });
-    console.log("My Houses")
-    console.log(myHouses)
-
   }, []);
 
   

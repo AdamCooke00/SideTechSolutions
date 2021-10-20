@@ -494,6 +494,32 @@
       padding: 1em 2em;
       margin: 2em;
       background-color: var(--white);
+      .justifyContentCenter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2em;
+        .signInWithEmailBtn {
+          display: block;
+          font-family: Roboto;
+          margin-top: 1em;
+          background-color: var(--primarypurple);
+          border: none;
+          color: var(--white);
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 14px;
+          padding: 1em 3em;
+          margin: 1em;
+        }
+        img {
+          cursor: pointer;
+        }
+      }
+
       .formtitle {
         margin-bottom: 2em;
       }
