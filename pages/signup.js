@@ -12,6 +12,7 @@ export default function SignUp() {
     const {currentUser, signup, googleLogin} = useAuth()
     const [error, setError] = useState('')
     const [formDisplayName, setFormDisplayName] = useState('')
+    const [usingForm, setUsingForm] = useState(true)
     const [pageLoading, setPageLoading] = useState(true)
     const [loading, setLoading] = useState(false) //so user doesnt spam signup and make multiple accounts. shouldnt be needed cuz of email restriction anyway but nonetheless
     const router = useRouter()
@@ -31,7 +32,7 @@ export default function SignUp() {
             await res.user.sendEmailVerification({
             url: "https://studenthousinghub.ca/my-account",
             })
-            router.push('/my-account')
+            setUsingForm(false)
             // ...
           }).catch((error) => {
             setError(error.message);
@@ -77,11 +78,12 @@ export default function SignUp() {
             <div className="loginbox">
                 <p>Please <strong>only create an account if you are a Landlord</strong>. We will be adding student accounts in the future.</p>
                 <h2 className="formtitle">Create Account</h2>
-                <div className="justifyContentCenter">
+                {usingForm && <div className="justifyContentCenter">
                   <img onClick={handleGoogleLogin} alt="Sign In With Google" src="/googlebtn.png"/>
-                </div>
+                </div>}
                 {error && <p>{error}</p>}
-                <form onSubmit={handleSubmit}>
+                {!usingForm && <p className="confirmationSent">A confirmation email has been sent to<br/>{emailRef.current.value || "Your Email"}<br/>Please check your email to add a listing. It may take up to 3 minutes to receive the email.</p>}
+                {usingForm && <form onSubmit={handleSubmit}>
                     <div className="formline">
                         <label className="formlabel">Email</label>
                         <input className="forminput" type="email" ref={emailRef} required/>
@@ -107,13 +109,13 @@ export default function SignUp() {
                         <label className="landordconfirmlabel">I confirm I am a Landlord</label>
                     </div>
                     <button className="signinbtn" disabled={loading} type="submit">Sign Up</button>
-                </form>
-                <p>Already have an account?</p>
-                <div className="bottomsololink"> 
+                </form>}
+                {usingForm && <p>Already have an account?</p>}
+                {usingForm && <div className="bottomsololink"> 
                     <Link href="/login">
                         <a>Login</a>
                     </Link>
-                </div>
+                </div> }
             </div>
         </div>
         <Footer/>

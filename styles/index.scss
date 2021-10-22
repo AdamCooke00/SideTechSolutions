@@ -494,6 +494,10 @@
       padding: 1em 2em;
       margin: 2em;
       background-color: var(--white);
+      .confirmationSent {
+        font-size: 20px;
+        font-weight: 600;
+      }
       .justifyContentCenter {
         display: flex;
         flex-direction: column;

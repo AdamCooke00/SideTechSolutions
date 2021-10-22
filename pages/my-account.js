@@ -30,7 +30,7 @@ export default function MyAccount() {
     });
   }
 
-  function sendEmailVerification(e){
+  function initiateEmailVerification(e){
     e.preventDefault()
     currentUser.sendEmailVerification({
       url: "https://studenthousinghub.ca/my-account",
@@ -108,7 +108,7 @@ export default function MyAccount() {
             </div>
             <div className="myprofileline">
               <p className="myprofilelineheader">Email Verified:</p>
-              {currentUser.emailVerified ? <p>Verified</p> : verificationError ? <button className="sentverificationbtn" disabled>Previous Sent</button> : sentVerification ? <button className="sentverificationbtn" disabled>Sent</button> : <button className="sendverificationbtn" onClick={sendEmailVerification}>Send Verification</button>}
+              {currentUser.emailVerified ? <p>Verified</p> : verificationError ? <button className="sentverificationbtn" disabled>Previous Sent</button> : sentVerification ? <button className="sentverificationbtn" disabled>Sent</button> : <button className="sendverificationbtn" onClick={initiateEmailVerification}>Send Verification</button>}
             </div>
             <div className="myprofileline">
               <p className="myprofilelineheader">Phone:</p>
@@ -129,7 +129,7 @@ export default function MyAccount() {
             </div>
             {!currentUser.emailVerified && sentVerification && <h3>Verification email has been sent ...</h3>}
             {!currentUser.emailVerified && verificationError && <h3>Email has already been sent. Error sending another verification email. Look in your inbox or try again later ...</h3>}
-            {!currentUser.emailVerified && !sentVerification && <h3 onClick={sendEmailVerification}>You must <span className="verifyemailspan">VERIFY YOUR EMAIL</span> before you can add listings</h3>}
+            {!currentUser.emailVerified && !sentVerification && <h3 onClick={initiateEmailVerification}>You must <span className="verifyemailspan">VERIFY YOUR EMAIL</span> before you can add listings</h3>}
             {currentUser.emailVerified && myHouses.length == 0 ? <p>Currently, You Have No Listings</p> : myHouses.map(listing => <div className="oneproperty" key={listing.id}>
               <ListingItem key={listing.id} id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} available={listing.available} landlordDisplayName={listing.landlordDisplayName} authorid={listing.author_uid}/>
               </div>
