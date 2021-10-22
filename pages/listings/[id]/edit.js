@@ -17,6 +17,9 @@ export default function EditListing() {
     const [totalPrice, setTotalPrice] = useState('')
     const [parkingSpacesState, setParkingSpacesState] = useState('')
     const [availabilityState, setAvailabilityState] = useState('')
+    const [moveInDateState, setMoveInDateState] = useState(new Date().toISOString().split('T')[0])
+    const [selectSpecificDate, setSelectSpecificDate] = useState(false)
+    const [selectSpecificCustomDate, setSelectSpecificCustomDate] = useState(false)
     const [utilitesState, setUtilitiesState] = useState('')
     const [internetState, setInternetState] = useState('')
     const [imgUrl, setImgUrl] = useState('');
@@ -42,6 +45,7 @@ export default function EditListing() {
             setUtilitiesState(listing.data().utilities)
             setAvailabilityState(listing.data().available)
             setTotalPrice(listing.data().price)
+            listing.data().moveInDate != undefined ? setMoveInDateState(listing.data().moveInDate) : setMoveInDateState("Select a date")
             let listRef = storage.ref("rentalPhotos/"+ currentUser.uid + "/" + id);
             await listRef.listAll()
                 .then((res) => {
@@ -101,6 +105,7 @@ export default function EditListing() {
             bedroomCount: bedroomCount,
             bathroomCount: bathroomCount,
             landlord: contactEmail,
+            moveInDate: moveInDateState,
             parkingSpaces: parkingSpacesState,
             utilities: utilitesState,
             internet: internetState,
@@ -204,6 +209,15 @@ export default function EditListing() {
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">Month Rent / Person</label>
                             <input disabled type="number" value={totalPrice / bedroomCount || 0} />
+                        </div>
+                        <div className="editlistingformline">
+                            <label className="editlistingformlabel" htmlFor="start">Move In Date</label>
+                            {!selectSpecificCustomDate && <input disabled type="text" value={moveInDateState}/>}
+                            {!selectSpecificDate && <p onClick={() => setSelectSpecificDate(true)} className="paragraphlikelink">Change Date</p>}
+                            {selectSpecificDate && !selectSpecificCustomDate && <p onClick={() => {setMoveInDateState(new Date().toISOString().split('T')[0]); setSelectSpecificDate(false);}} className="paragraphlikelink">Immediately</p> }
+                            {selectSpecificDate && !selectSpecificCustomDate && <p onClick={() => {setMoveInDateState("2022-05-01"); setSelectSpecificDate(false);}} className="paragraphlikelink">May 1st 2022</p> }
+                            {selectSpecificDate && !selectSpecificCustomDate && <p onClick={() => setSelectSpecificCustomDate(true)} className="paragraphlikelink">Select a specific date</p> }
+                            {selectSpecificCustomDate && <input type="date" id="start" value={moveInDateState} onChange={(e) => setMoveInDateState(e.target.value)} min={new Date().toISOString().split('T')[0]} max={"2023-05-01"} /> }
                         </div>
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">Parking Spaces</label>

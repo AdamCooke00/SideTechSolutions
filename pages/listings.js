@@ -154,7 +154,7 @@ export default function Home({ queriedListings }) {
           <p className="numberofrentals">{filteredListings.length} Rentals</p>
           {filteredListings.map(listing =>
             <div key={listing.id} className="asinglelisting">
-              <ListingItem id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} available={listing.available} landlordDisplayName={listing.landlordDisplayName} authorid={listing.author_uid} />
+              <ListingItem id={listing.id} price={listing.price} address={listing.address} bedrooms={listing.bedroomCount} bathrooms={listing.bathroomCount} moveInDate={listing.moveInDate} available={listing.available} landlordDisplayName={listing.landlordDisplayName} authorid={listing.author_uid} />
             </div>
           )}
         </div>

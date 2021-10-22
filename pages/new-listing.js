@@ -11,12 +11,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function NewListing() {
     const [pageLoading, setPageLoading] = useState(true)
+    const [selectSpecificDate, setSelectSpecificDate] = useState(false)
     const [addressText, setAddressText] = useState('')
     const [bedroomCountState, setBedroomCountState] = useState('')
     const [bathroomCountState, setBathroomCountState] = useState('')
     const [totalMonthRentState, setTotalMonthRentState] = useState('')
     const [parkingSpacesState, setParkingSpacesState] = useState('')
     const [utilitesState, setUtilitiesState] = useState('')
+    const [moveInDateState, setMoveInDateState] = useState(new Date().toISOString().split('T')[0])
     const [internetState, setInternetState] = useState('')
     const [contactEmail, setContactEmail] = useState('')
     const router = useRouter()
@@ -75,6 +77,7 @@ export default function NewListing() {
                     bedroomCount: bedroomCountState,
                     bathroomCount: bathroomCountState,
                     price: totalMonthRentState,
+                    moveInDate: moveInDateState,
                     parkingSpaces: parkingSpacesState,
                     utilities: utilitesState,
                     internet: internetState,
@@ -160,8 +163,12 @@ export default function NewListing() {
                             <input disabled type="number" value={totalMonthRentState / bedroomCountState || 0} />
                         </div>
                         <div className="newlistingformline">
-                            <label className="newlistingformlabel">Move In Date</label>
-                            <input disabled type="text" value="May 2022 Default ----- Edit Move In Date Coming Soon" />
+                            <label className="newlistingformlabel" htmlFor="start">Move In Date</label>
+                            {!selectSpecificDate && <input disabled type="text" value={"Select a date below"}/> }
+                            {!selectSpecificDate && <p onClick={() => {setMoveInDateState(new Date().toISOString().split('T')[0]); setSelectSpecificDate(true);}} className="paragraphlikelink">Immediately</p> }
+                            {!selectSpecificDate && <p onClick={() => {setMoveInDateState("2022-05-01"); setSelectSpecificDate(true);}} className="paragraphlikelink">May 1st 2022</p> }
+                            {!selectSpecificDate && <p onClick={() => setSelectSpecificDate(true)} className="paragraphlikelink">Select a specific date</p> }
+                            {selectSpecificDate && <input type="date" id="start" value={moveInDateState} onChange={(e) => setMoveInDateState(e.target.value)} min={new Date().toISOString().split('T')[0]} max={"2023-05-01"} /> }
                         </div>
                         <div className="newlistingformline">
                             <label className="newlistingformlabel">Parking Spaces</label>

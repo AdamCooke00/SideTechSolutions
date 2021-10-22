@@ -61,6 +61,7 @@ export default function Listing({ data, photos }) {
     const { currentUser } = useAuth();
     const { id } = router.query
     const [imgUrl, setImgUrl] = useState('');
+    const [moveInDateString, setMoveInDateString] = useState('');
     const [viewImages, setViewImages] = useState(false);
     const [showContact, setShowContact] = useState(false);
     const [additionaImages, setAdditionalImages] = useState([]);
@@ -71,6 +72,12 @@ export default function Listing({ data, photos }) {
             setImgUrl(photos.thumbnail);
             setAdditionalImages(photos.extraPictures);
         }
+        setMoveInDateString("May 1st 2022")
+        if(data.moveInDate != undefined){
+            let theDate = new Date(data.moveInDate)
+            theDate.setDate(theDate.getDate() + 1)
+            setMoveInDateString(theDate.toDateString().split(" ").slice(1).join(" "))
+        } 
     }, []);
 
     return (
@@ -118,7 +125,7 @@ export default function Listing({ data, photos }) {
                     </div>
                     <div className="singleListingHouseInfo">
                         <p className="leftaligntext">Move In Date:</p>
-                        <p className="rightaligntext">May 1st 2022</p>
+                        <p className="rightaligntext">{moveInDateString}</p>
                     </div>
                     <div className="singleListingHouseInfo">
                         <p className="leftaligntext">Parking Spaces:</p>
