@@ -82,7 +82,7 @@ export default function Login() {
           <div className="loginbox">
                 <h2 className="formtitle">Sign In</h2>
                 {error && <p>{error}</p>}
-                <p>If you are using a @gmail account, it is recommended to Sign in using gmail.</p>
+                <p>If you are using a Gmail account, it is recommended to Sign in with Google.</p>
                 <div className="justifyContentCenter">
                   <img onClick={handleGoogleLogin} alt="Sign In With Google" src="/googlebtn.png"/>
                   {!signInWithEmailToggle && <button className="signInWithEmailBtn" onClick={() => setSignInWithEmailToggle(true)}>Sign in with Email</button>}
