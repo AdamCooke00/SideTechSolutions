@@ -24,21 +24,21 @@ export default function Contact() {
           <div className="contactuslandlords">
             <h3 className="contactuslandlordtitle">For Landlords</h3>
             <p>Having an issue uploading your rental, updatings its information, changing its status to sold, or anything else?<br/>Email us!</p>
-            <p className="contactusemailaddress">landlord@studenthousinghub.ca</p>
+            <a className="contactusemailaddress" href="mailto:landlord@studenthousinghub.ca">landlord@studenthousinghub.ca</a>
             <p>Messages must be regarding an issue/request on the Student Housing Hub platform.</p>
           </div>
 
           <div className="contactusstudents">
             <h3 className="contactusstudenttitle">For Students</h3>
             <p>Having an issue with your account, or have any ideas you would like to see added to the platform?<br/>Email us!</p>
-            <p className="contactusemailaddress">student@studenthousinghub.ca</p>
+            <a className="contactusemailaddress" href="mailto:student@studenthousinghub.ca">student@studenthousinghub.ca</a>
             <p>Please leave a detailed message and we will get back to you as soon as possible.</p>
           </div>
 
           <div className="contactusreportabug">
             <h3 className="contactusbugtitle">Report A Bug!</h3>
             <p>Found a bug on our platform?<br/>Email us!</p>
-            <p className="contactusemailaddress">bug@studenthousinghub.ca</p>
+            <a className="contactusemailaddress" href="mailto:bug@studenthousinghub.ca">bug@studenthousinghub.ca</a>
             <p>If possible, please leave a detailed explanation of the problem and how to recreate it.</p>
           </div>
         </div>

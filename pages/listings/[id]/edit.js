@@ -181,7 +181,7 @@ export default function EditListing() {
         <Navbar/>
         <div className="editlistingpageportion">
             <div className="editlistingformdiv">
-                <h2 className="editlistingformtitle">Edit Your Listing</h2>
+                <h2 className="editlistingformtitle">Edit<br/>{address}</h2>
                     {error && <p variant="danger">{error}</p>}
                     <p>Current Availability: {availabilityState ? "Is Available" : "Is Not Available"}</p>
                     {availabilityState ? <button className="notAvailablebtn" disabled={loading} onClick={handleChangeAvailibility} type="submit">Rental Is No Longer Available</button> : <button disabled={loading} className="nowAvailablebtn" onClick={handleChangeAvailibility} type="submit">Rental is Now Available</button>}
@@ -192,7 +192,7 @@ export default function EditListing() {
                         <div className="editlistingformline">
                             <label className="editlistingformlabel">House Address</label>
                             <input type="text" value={address} disabled required/>
-                            <p>Sorry, address editing is unavailable. Please email <strong>landlord@studenthousinghub.ca</strong> for assistance or, delete this listing and create a new one.</p>
+                            <p>Changing the house address is disabled. Please email <strong>landlord@studenthousinghub.ca</strong> for assistance or, delete this listing and create a new one with the correct address.</p>
                         </div>
                         <div  className="editlistingformline">
                             <label className="editlistingformlabel">No. of Bedrooms</label>

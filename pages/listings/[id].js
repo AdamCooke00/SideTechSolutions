@@ -167,13 +167,14 @@ export default function Listing({ data, photos }) {
                         <button className="requestatourbtn" onClick={() => setShowContact(!showContact)}>{showContact ? "Close Request" : "Request A Tour / Request Information"}</button>
                     </div>
                     {showContact && <div className="requesttourinfo">
-                        <h4>Email <span>{data.landlord}</span> using the following template.</h4>
-                        <ol>
-                            <li>Subject/Heading: Example:<br/><span>"{data.address} - Tour Request from SHH"</span></li>
-                            <li>General Info: Example:<br/><span>"Hello [Landlord], we are a group of X 2nd year students attending Queen's University looking for a rental for May 2022."</span></li>
-                            <li>Request: Example:<br/><span>"We are interested in this rental and are looking to schedule an in-person tour. We are available Wednesday the 3rd before noon or after 5pm.</span></li>
-                            <li>End: Example:<br/><span>"Thank you and we look forward to your response. Best, [you].</span></li>
-                        </ol>
+                        <h2>Request A Tour</h2>
+                        <h4>To request a tour or more information please email<a href={"mailto:" + data.landlord}>{data.landlord}</a> using the following template.</h4>
+                        <ul>
+                            <li>Subject Line<br/><span>{data.address} - Tour Request from SHH</span></li>
+                            <li>Information<br/><span>Hello, we are a group of [second/third/...] year students attending Queen's University looking for a rental for May 2022.</span></li>
+                            <li>Request<br/><span>We are interested in this rental and are looking to schedule an in-person tour. We are available Wednesday the 3rd before noon or after 5pm.</span></li>
+                            <li>Regards<br/><span>Thank you and we look forward to your response. Best, [you].</span></li>
+                        </ul>
                     </div>}
                 </div>
             </div>
